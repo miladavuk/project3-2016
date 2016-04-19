@@ -32,5 +32,15 @@ public class Kategorije {
 			"Java", "Nokia", "Microsoft", "Pionir", "Marlboro", "Miflord", "Nivea", "Dove", "Gorenje", "Banini",
 			"Bambi", "Toshiba", "Genius" };
 			
-
+	private String[] poznateLicnosti = new String[]{
+			"Rafael Nadal", "Rihanna", "Brad Pitt", "Leonardo DiCaprio", "Tom Cruise", "Barak Obama","Emma Watson", 
+			"Johnny Depp", "Morgan Freeman", "Michael Jordan", "Kobe Bryant", "LeBron James", "Madonna","Stephen King",
+			"Michael Jackson", "Jennifer Lopez", "Bill Gates", "Paulo Coelho", "Joanne Kathleen Rowling", "George RR Martin"
+			};
+	private String[] istorijskeLicnosti = new String[]{
+			"William Shakespeare", "Abraham Lincoln", "George Washington", "Adolf Hitler", "Aristotle", "Charles Darwin",
+			"Karl Marx", "Julius Caesar", "Albert Einstein", "Christopher Columbus", "Isaac Newton", "Wolfgang Amadeus Mozart",
+			"Leonardo da Vinci", "Charles Dickens", "Winston Churchill", "Friedrich Nietzsche", "Sigmund Freud", "Johann Sebastian Bach",
+			"Galileo Galilei", "Adam Smith"
+	};
 }
