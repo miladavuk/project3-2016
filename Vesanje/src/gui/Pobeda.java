@@ -12,27 +12,41 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 public class Pobeda extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-
 	public Pobeda() {
 		setBounds(100, 100, 600, 450);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new BorderLayout(0, 0));
+
+		
+		
 		{
+		
+			
 			JPanel panel = new JPanel();
-			contentPanel.add(panel);
+			contentPanel.add(panel, BorderLayout.CENTER);
 
 			BufferedImage slika;
 			try {
 				slika = ImageIO.read(this.getClass().getResource("/resursi/Winneer.jpg"));
 				JLabel ikona = new JLabel(new ImageIcon(slika));
 				panel.add(ikona);
+				{
+					JPanel panel_South = new JPanel();
+					contentPanel.add(panel_South, BorderLayout.SOUTH);
+					{
+						JLabel lblNewLabel = new JLabel("YOU WIN!");
+						lblNewLabel.setFont(new Font("Palatino", Font.BOLD, 20));
+						panel_South.add(lblNewLabel);
+					}
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -22,8 +22,8 @@ public class GUIKontrolor {
 			}
 		});
 	}
-	
-	private static void prikaziGlavniProzor(){
+
+	private static void prikaziGlavniProzor() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -35,8 +35,8 @@ public class GUIKontrolor {
 			}
 		});
 	}
-	
-	private static void prikaziPobedu(){
+
+	private static void prikaziPobedu() {
 		try {
 			Pobeda dialog = new Pobeda();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -45,8 +45,8 @@ public class GUIKontrolor {
 			e.printStackTrace();
 		}
 	}
-	
-	private static void prikaziPoraz(){
+
+	private static void prikaziPoraz() {
 		try {
 			Poraz dialog = new Poraz();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

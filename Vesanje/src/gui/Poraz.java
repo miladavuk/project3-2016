@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 public class Poraz extends JDialog {
 
@@ -19,7 +20,7 @@ public class Poraz extends JDialog {
 
 
 	public Poraz() {
-		setBounds(100, 100, 450, 750);
+		setBounds(100, 100, 350, 550);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -30,9 +31,18 @@ public class Poraz extends JDialog {
 
 			BufferedImage slika;
 			try {
-				slika = ImageIO.read(this.getClass().getResource("/resursi/Loseer.jpg"));
+				slika = ImageIO.read(this.getClass().getResource("/resursi/Loseeer.jpg"));
 				JLabel ikona = new JLabel(new ImageIcon(slika));
 				panel.add(ikona);
+				{
+					JPanel panel_South = new JPanel();
+					contentPanel.add(panel_South, BorderLayout.SOUTH);
+					{
+						JLabel lblNewLabel = new JLabel("YOU LOSE!");
+						lblNewLabel.setFont(new Font("Palatino", Font.BOLD, 20));
+						panel_South.add(lblNewLabel);
+					}
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
