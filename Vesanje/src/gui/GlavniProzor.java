@@ -39,25 +39,7 @@ public class GlavniProzor extends JFrame {
 	private JButton btnExitGame;
 	private JLabel lblPrazanProstor4;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GlavniProzor frame = new GlavniProzor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public GlavniProzor() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GlavniProzor.class.getResource("/resursi/ghosticon.png")));
 		setResizable(false);

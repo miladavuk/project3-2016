@@ -17,22 +17,7 @@ public class Pobeda extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			Pobeda dialog = new Pobeda();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public Pobeda() {
 		setBounds(100, 100, 600, 450);
 		getContentPane().setLayout(new BorderLayout());

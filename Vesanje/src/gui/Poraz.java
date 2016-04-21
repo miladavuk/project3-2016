@@ -17,22 +17,7 @@ public class Poraz extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			Poraz dialog = new Poraz();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public Poraz() {
 		setBounds(100, 100, 450, 750);
 		getContentPane().setLayout(new BorderLayout());
