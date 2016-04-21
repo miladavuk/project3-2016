@@ -28,7 +28,7 @@ public class Kategorije {
 			"Interstellar", "Schindler's List", "Pirats Of The Carribian", "Madagascar", "Frozen", "Hobbit",
 			"The Lord Of The Rings", "Adaptation", "Dead Poets Society", "Hook", "Spiderman", "Avengers", "Avatar",
 			"Titanic", "Finding Neverland" };
-	private String[] brendovi = new String[] { "Coca-Cola", "Orbit", "Bershka", "Converse", "Nike", "Rebook", "Celvin Klein",
+	private String[] brendovi = new String[] { "Coca Cola", "Orbit", "Bershka", "Converse", "Nike", "Rebook", "Celvin Klein",
 			"Java", "Nokia", "Microsoft", "Pionir", "Marlboro", "Miflord", "Nivea", "Dove", "Gorenje", "Banini",
 			"Bambi", "Toshiba", "Genius" };
 			
