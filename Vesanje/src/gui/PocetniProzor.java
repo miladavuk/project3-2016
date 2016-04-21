@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class PocetniProzor extends JFrame {
 
@@ -54,6 +55,7 @@ public class PocetniProzor extends JFrame {
 	 * Create the frame.
 	 */
 	public PocetniProzor() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PocetniProzor.class.getResource("/resursi/ghosticon.png")));
 		setTitle("Hangman");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
