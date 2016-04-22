@@ -8,11 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import baza.Igrac;
 import baza.TabelaZaScore;
+import gui.kontrolor.GUIKontrolor;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Score extends JFrame {
 
@@ -24,15 +28,9 @@ public class Score extends JFrame {
 	private JLabel jlblPlayer;
 	private JLabel jlblImeIgraca;
 	private JTable jtblScore;
-	private Igrac igrac;
 	private JButton jbtnOk;
 
-	public Igrac getIgrac() {
-		return igrac;
-	}
-	public void setIgrac(Igrac igrac) {
-		this.igrac = igrac;
-	}
+
 	/**
 	 * Create the frame.
 	 */
@@ -61,7 +59,7 @@ public class Score extends JFrame {
 	}
 	private JLabel getJlblImeIgraca() {
 		if (jlblImeIgraca == null) {
-			jlblImeIgraca = new JLabel(igrac.getIme());
+			jlblImeIgraca = new JLabel(GUIKontrolor.igraci.vratiIgraca(GUIKontrolor.indexTrenutnogIgraca).getIme());
 			jlblImeIgraca.setForeground(Color.RED);
 			jlblImeIgraca.setFont(new Font("Tahoma", Font.BOLD, 18));
 			jlblImeIgraca.setBounds(148, 13, 286, 30);
@@ -70,7 +68,7 @@ public class Score extends JFrame {
 	}
 	private JTable getJtblScore() {
 		if (jtblScore == null) {
-			jtblScore = new JTable(new TabelaZaScore(igrac));
+			jtblScore = new JTable(new TabelaZaScore(GUIKontrolor.igraci.vratiIgraca(GUIKontrolor.indexTrenutnogIgraca)));
 			jtblScore.setBounds(44, 169, 357, -105);
 		}
 		return jtblScore;
@@ -78,7 +76,14 @@ public class Score extends JFrame {
 	private JButton getJbtnOk() {
 		if (jbtnOk == null) {
 			jbtnOk = new JButton("OK");
-			jbtnOk.setBounds(379, 238, 55, 23);
+			jbtnOk.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					dispose();
+				}
+			});
+			jbtnOk.setPreferredSize(new Dimension(30, 30));
+			jbtnOk.setBounds(379, 231, 55, 30);
 		}
 		return jbtnOk;
 	}

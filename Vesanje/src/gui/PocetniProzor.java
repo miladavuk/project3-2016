@@ -1,33 +1,37 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import gui.kontrolor.GUIKontrolor;
-
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import net.miginfocom.swing.MigLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+
+import gui.kontrolor.GUIKontrolor;
+import net.miginfocom.swing.MigLayout;
 
 public class PocetniProzor extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel jpnlGameButtons;
 	private JButton jbtnNewGame;
@@ -39,6 +43,7 @@ public class PocetniProzor extends JFrame {
 	private JButton btnOk;
 	private JButton btnSeeYourScore;
 	private JPanel jpnlSlika;
+	private JLabel jlblError;
 
 	/**
 	 * Launch the application.
@@ -49,6 +54,12 @@ public class PocetniProzor extends JFrame {
 	 * Create the frame.
 	 */
 	public PocetniProzor() {
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				GUIKontrolor.ugasiAplikaciju();
+			}
+
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PocetniProzor.class.getResource("/resursi/ghosticon.png")));
 		setTitle("Hangman");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,6 +98,12 @@ public class PocetniProzor extends JFrame {
 	private JButton getJbtnInstructions() {
 		if (jbtnInstructions == null) {
 			jbtnInstructions = new JButton("Instructions");
+			jbtnInstructions.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					GUIKontrolor.pozoviInstrukcije();
+				}
+			});
 			jbtnInstructions.setPreferredSize(new Dimension(130, 30));
 		}
 		return jbtnInstructions;
@@ -94,6 +111,12 @@ public class PocetniProzor extends JFrame {
 	private JButton getJbtnExit() {
 		if (jbtnExit == null) {
 			jbtnExit = new JButton("Exit");
+			jbtnExit.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					GUIKontrolor.ugasiAplikaciju();
+				}
+			});
 			jbtnExit.setPreferredSize(new Dimension(130, 30));
 		}
 		return jbtnExit;
@@ -101,11 +124,12 @@ public class PocetniProzor extends JFrame {
 	private JPanel getJpnlPlayerButtons() {
 		if (jpnlPlayerButtons == null) {
 			jpnlPlayerButtons = new JPanel();
-			jpnlPlayerButtons.setLayout(new MigLayout("", "[grow]", "[][][]"));
+			jpnlPlayerButtons.setLayout(new MigLayout("", "[grow]", "[][][][]"));
 			jpnlPlayerButtons.add(getLblPlayer(), "cell 0 0,growx");
 			jpnlPlayerButtons.add(getJtxtPlayer(), "flowx,cell 0 1,growx");
 			jpnlPlayerButtons.add(getBtnOk(), "cell 0 1");
 			jpnlPlayerButtons.add(getBtnSeeYourScore(), "cell 0 2,growx");
+			jpnlPlayerButtons.add(getJlblError(), "cell 0 3");
 		}
 		return jpnlPlayerButtons;
 	}
@@ -130,6 +154,14 @@ public class PocetniProzor extends JFrame {
 	private JButton getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new JButton("OK");
+			btnOk.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					String igrac = jtxtPlayer.getText();
+					if(igrac.isEmpty())jlblError.setText("You didn't enter any name!");
+					else if(GUIKontrolor.igraci.incijalizujIgraca(igrac)) jlblError.setText("New player is created!");
+				}
+			});
 			btnOk.setPreferredSize(new Dimension(50, 30));
 		}
 		return btnOk;
@@ -137,6 +169,12 @@ public class PocetniProzor extends JFrame {
 	private JButton getBtnSeeYourScore() {
 		if (btnSeeYourScore == null) {
 			btnSeeYourScore = new JButton("See your score!");
+			btnSeeYourScore.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					if(GUIKontrolor.indexTrenutnogIgraca == -1) jlblError.setText("You haven't chosen your player!");
+					else GUIKontrolor.prozorZaScore();
+				}
+			});
 			btnSeeYourScore.setForeground(Color.BLUE);
 			btnSeeYourScore.setPreferredSize(new Dimension(109, 30));
 			btnSeeYourScore.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -159,5 +197,13 @@ public class PocetniProzor extends JFrame {
 			e.printStackTrace();
 		}
 		return jpnlSlika;
+	}
+	private JLabel getJlblError() {
+		if (jlblError == null) {
+			jlblError = new JLabel("");
+			jlblError.setForeground(Color.RED);
+			jlblError.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		}
+		return jlblError;
 	}
 }

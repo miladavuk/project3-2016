@@ -1,19 +1,18 @@
 package gui.kontrolor;
 
 import java.awt.EventQueue;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import baza.Igrac;
+import baza.Igraci;
 import baza.Kategorije;
 import gui.GlavniProzor;
+import gui.Intructions;
 import gui.Pobeda;
 import gui.PocetniProzor;
 import gui.Poraz;
@@ -25,15 +24,20 @@ public class GUIKontrolor {
 	public static int brojPromasaja = 0;
 	public static LinkedList<Character> koriscenaSlova = new LinkedList<>();
 	public static int brojKoriscenihSlova = 0;
+	public static PocetniProzor pocetniProzor;
+	public static Igraci igraci;
+	public static int indexTrenutnogIgraca;
 
 	public static void main(String[] args) {
+		igraci = new Igraci();
+		indexTrenutnogIgraca = -1;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PocetniProzor frame = new PocetniProzor();
-					frame.setVisible(true);
-					Poraz p = new Poraz();
-					p.setVisible(true);
+					pocetniProzor = new PocetniProzor();
+					pocetniProzor.setVisible(true);
+	//				Poraz p = new Poraz();
+		//			p.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -108,12 +112,11 @@ public class GUIKontrolor {
 	}
 
 	
-	public static void prozorZaScore(final Igrac igrac){
+	public static void prozorZaScore(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Score frame = new Score();
-					frame.setIgrac(igrac);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -158,4 +161,27 @@ public class GUIKontrolor {
 	}
 
 
+	public static void pozoviInstrukcije(){
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Intructions frame = new Intructions();
+					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public static void ugasiAplikaciju() {
+		int opcija = JOptionPane.showConfirmDialog(pocetniProzor.getContentPane(),
+				"Da li ste sigurni da zelite da zatvorite aplikaciju?", "Izlazak", JOptionPane.YES_NO_OPTION);
+
+		if (opcija == JOptionPane.YES_OPTION) {
+			igraci.serijalizujIgrace();
+			System.exit(0);
+		}
+	}
 }
