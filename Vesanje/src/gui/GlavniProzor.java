@@ -51,7 +51,7 @@ public class GlavniProzor extends JFrame {
 	private JTable table;
 	private static char[] recZaPrikazNiz = "Default word".toCharArray();
 	private JScrollPane scrollPane;
-	
+
 	public GlavniProzor() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GlavniProzor.class.getResource("/resursi/ghosticon.png")));
 		setResizable(false);
@@ -68,16 +68,16 @@ public class GlavniProzor extends JFrame {
 		contentPane.add(getPanelZaSliku(), BorderLayout.CENTER);
 	}
 
-
 	private JPanel getPanelZaRec() {
 		if (panelZaRec == null) {
 			panelZaRec = new JPanel();
 			panelZaRec.setPreferredSize(new Dimension(10, 50));
 			panelZaRec.add(getScrollPane());
-			
+
 		}
 		return panelZaRec;
 	}
+
 	private JPanel getPanelZaDugmice() {
 		if (panelZaDugmice == null) {
 			panelZaDugmice = new JPanel();
@@ -97,10 +97,11 @@ public class GlavniProzor extends JFrame {
 		}
 		return panelZaDugmice;
 	}
+
 	private JPanel getPanelZaSliku() {
-		if (panelZaSliku == null) 
-			panelZaSliku = new JPanel();		
-		
+		if (panelZaSliku == null)
+			panelZaSliku = new JPanel();
+
 		BufferedImage slika;
 		try {
 			slika = ImageIO.read(this.getClass().getResource("/resursi/vesala1.jpg"));
@@ -110,22 +111,23 @@ public class GlavniProzor extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-			
+
 		return panelZaSliku;
 	}
+
 	private JTable getTable() {
-		 		if (table == null) {
-		 		table = new JTable();
-		 		table.setPreferredSize(new Dimension(480, 18));
-		 		table.setFillsViewportHeight(true);
-		 		table.setShowHorizontalLines(false);
-		 		table.setRowSelectionAllowed(false);
-		 			table.setModel(new TabelaZaRec(recZaPrikazNiz));
-		 			table.setTableHeader(null);
-		 		}
-		 		return table;
-		 	}
+		if (table == null) {
+			table = new JTable();
+			table.setPreferredSize(new Dimension(480, 18));
+			table.setFillsViewportHeight(true);
+			table.setShowHorizontalLines(false);
+			table.setRowSelectionAllowed(false);
+			table.setModel(new TabelaZaRec(recZaPrikazNiz));
+			table.setTableHeader(null);
+		}
+		return table;
+	}
+
 	private JLabel getLblKategorija() {
 		if (lblKategorija == null) {
 			lblKategorija = new JLabel("Category:");
@@ -134,17 +136,18 @@ public class GlavniProzor extends JFrame {
 		}
 		return lblKategorija;
 	}
+
 	private JComboBox getComboBoxKategorije() {
 		if (comboBoxKategorije == null) {
 			comboBoxKategorije = new JComboBox();
 			comboBoxKategorije.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					String kategorija = comboBoxKategorije.getSelectedItem().toString();
-					String recZaPrikaz = GUIKontrolor.vratiString(kategorija);	
+					String recZaPrikaz = GUIKontrolor.vratiString(kategorija);
 					recZaPrikazNiz = recZaPrikaz.toCharArray();
 					table.setModel(new TabelaZaRec(recZaPrikazNiz));
-		 			table.setTableHeader(null);			
-					
+					table.setTableHeader(null);
+
 				}
 			});
 			comboBoxKategorije.setPreferredSize(new Dimension(100, 25));
@@ -153,11 +156,12 @@ public class GlavniProzor extends JFrame {
 			comboBoxKategorije.addItem("Classical books");
 			comboBoxKategorije.addItem("Hystoric people");
 			comboBoxKategorije.addItem("Famous people");
-			comboBoxKategorije.addItem("Famous brands");	
+			comboBoxKategorije.addItem("Famous brands");
 		}
-			
+
 		return comboBoxKategorije;
 	}
+
 	private JLabel getLblIzaberiSlovo() {
 		if (lblIzaberiSlovo == null) {
 			lblIzaberiSlovo = new JLabel("Pick a letter:");
@@ -166,9 +170,22 @@ public class GlavniProzor extends JFrame {
 		}
 		return lblIzaberiSlovo;
 	}
+
 	private JComboBox getComboBoxSlova() {
 		if (comboBoxSlova == null) {
 			comboBoxSlova = new JComboBox();
+			comboBoxSlova.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String slovoString = comboBoxSlova.getSelectedItem().toString();
+					char slovo = slovoString.charAt(0);
+					char[] recZaPrikazNiz = GUIKontrolor.dodajSlovo(slovo);
+					if (GUIKontrolor.brojPromasaja != 0) {
+						
+					}
+					table.setModel(new TabelaZaRec(recZaPrikazNiz));
+					table.setTableHeader(null);
+				}
+			});
 			comboBoxSlova.addItem('A');
 			comboBoxSlova.addItem('B');
 			comboBoxSlova.addItem('C');
@@ -198,6 +215,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return comboBoxSlova;
 	}
+
 	private JLabel getLblTryTheWhole() {
 		if (lblTryTheWhole == null) {
 			lblTryTheWhole = new JLabel("Try the whole word:");
@@ -206,6 +224,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return lblTryTheWhole;
 	}
+
 	private JTextField getTextField() {
 		if (textField == null) {
 			textField = new JTextField();
@@ -214,6 +233,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return textField;
 	}
+
 	private JLabel getLblPrazanProstor1() {
 		if (lblPrazanProstor1 == null) {
 			lblPrazanProstor1 = new JLabel("");
@@ -221,6 +241,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return lblPrazanProstor1;
 	}
+
 	private JLabel getLblPrazanProstor2() {
 		if (lblPrazanProstor2 == null) {
 			lblPrazanProstor2 = new JLabel("");
@@ -228,6 +249,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return lblPrazanProstor2;
 	}
+
 	private JLabel getLabel_1() {
 		if (lblPrazanProstor3 == null) {
 			lblPrazanProstor3 = new JLabel("");
@@ -235,6 +257,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return lblPrazanProstor3;
 	}
+
 	private JButton getBtnExitGame() {
 		if (btnExitGame == null) {
 			btnExitGame = new JButton("Exit game");
@@ -242,6 +265,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return btnExitGame;
 	}
+
 	private JLabel getLabel_2() {
 		if (lblPrazanProstor4 == null) {
 			lblPrazanProstor4 = new JLabel("");
@@ -249,6 +273,7 @@ public class GlavniProzor extends JFrame {
 		}
 		return lblPrazanProstor4;
 	}
+
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
@@ -258,4 +283,3 @@ public class GlavniProzor extends JFrame {
 		return scrollPane;
 	}
 }
-
