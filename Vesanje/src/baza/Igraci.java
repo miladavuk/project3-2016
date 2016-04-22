@@ -50,4 +50,15 @@ public class Igraci {
 			// TODO: handle exception
 		}
 	}
+	
+	public int vratiIndexIgraca(String ime){
+		for (int i = 0; i < igraci.size(); i++) {
+			if(igraci.get(i).getIme().equals(ime)) return i;
+		}
+		return -1;
+	}
+	
+	public Igrac vratiIgraca(int index){
+		return igraci.get(index);
+	}
 }
