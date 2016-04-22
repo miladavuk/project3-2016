@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.kontrolor.GUIKontrolor;
+
 import java.awt.Dimension;
 
 import javax.imageio.ImageIO;
@@ -20,6 +23,8 @@ import java.io.IOException;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PocetniProzor extends JFrame {
 
@@ -70,6 +75,11 @@ public class PocetniProzor extends JFrame {
 	private JButton getJbtnNewGame() {
 		if (jbtnNewGame == null) {
 			jbtnNewGame = new JButton("New Game");
+			jbtnNewGame.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				GUIKontrolor.prikaziGlavniProzor();				
+				}
+			});
 			jbtnNewGame.setPreferredSize(new Dimension(130, 30));
 		}
 		return jbtnNewGame;

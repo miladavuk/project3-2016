@@ -43,4 +43,41 @@ public class Kategorije {
 			"Leonardo da Vinci", "Charles Dickens", "Winston Churchill", "Friedrich Nietzsche", "Sigmund Freud", "Johann Sebastian Bach",
 			"Galileo Galilei", "Adam Smith"
 	};
+	public String[] getKnjige() {
+		return knjige;
+	}
+	public void setKnjige(String[] knjige) {
+		this.knjige = knjige;
+	}
+	public String[] getDrzave() {
+		return drzave;
+	}
+	public void setDrzave(String[] drzave) {
+		this.drzave = drzave;
+	}
+	public String[] getFilmovi() {
+		return filmovi;
+	}
+	public void setFilmovi(String[] filmovi) {
+		this.filmovi = filmovi;
+	}
+	public String[] getBrendovi() {
+		return brendovi;
+	}
+	public void setBrendovi(String[] brendovi) {
+		this.brendovi = brendovi;
+	}
+	public String[] getPoznateLicnosti() {
+		return poznateLicnosti;
+	}
+	public void setPoznateLicnosti(String[] poznateLicnosti) {
+		this.poznateLicnosti = poznateLicnosti;
+	}
+	public String[] getIstorijskeLicnosti() {
+		return istorijskeLicnosti;
+	}
+	public void setIstorijskeLicnosti(String[] istorijskeLicnosti) {
+		this.istorijskeLicnosti = istorijskeLicnosti;
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -12,7 +13,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableModel;
+
+import baza.TabelaZaRec;
+import gui.kontrolor.GUIKontrolor;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
@@ -20,6 +28,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GlavniProzor extends JFrame {
 
@@ -38,7 +48,9 @@ public class GlavniProzor extends JFrame {
 	private JLabel lblPrazanProstor3;
 	private JButton btnExitGame;
 	private JLabel lblPrazanProstor4;
-
+	private JTable table;
+	private static char[] recZaPrikazNiz = "Default word".toCharArray();
+	private JScrollPane scrollPane;
 	
 	public GlavniProzor() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GlavniProzor.class.getResource("/resursi/ghosticon.png")));
@@ -56,10 +68,13 @@ public class GlavniProzor extends JFrame {
 		contentPane.add(getPanelZaSliku(), BorderLayout.CENTER);
 	}
 
+
 	private JPanel getPanelZaRec() {
 		if (panelZaRec == null) {
 			panelZaRec = new JPanel();
 			panelZaRec.setPreferredSize(new Dimension(10, 50));
+			panelZaRec.add(getScrollPane());
+			
 		}
 		return panelZaRec;
 	}
@@ -99,6 +114,18 @@ public class GlavniProzor extends JFrame {
 			
 		return panelZaSliku;
 	}
+	private JTable getTable() {
+		 		if (table == null) {
+		 		table = new JTable();
+		 		table.setPreferredSize(new Dimension(480, 18));
+		 		table.setFillsViewportHeight(true);
+		 		table.setShowHorizontalLines(false);
+		 		table.setRowSelectionAllowed(false);
+		 			table.setModel(new TabelaZaRec(recZaPrikazNiz));
+		 			table.setTableHeader(null);
+		 		}
+		 		return table;
+		 	}
 	private JLabel getLblKategorija() {
 		if (lblKategorija == null) {
 			lblKategorija = new JLabel("Category:");
@@ -110,6 +137,16 @@ public class GlavniProzor extends JFrame {
 	private JComboBox getComboBoxKategorije() {
 		if (comboBoxKategorije == null) {
 			comboBoxKategorije = new JComboBox();
+			comboBoxKategorije.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					String kategorija = comboBoxKategorije.getSelectedItem().toString();
+					String recZaPrikaz = GUIKontrolor.vratiString(kategorija);	
+					recZaPrikazNiz = recZaPrikaz.toCharArray();
+					table.setModel(new TabelaZaRec(recZaPrikazNiz));
+		 			table.setTableHeader(null);			
+					
+				}
+			});
 			comboBoxKategorije.setPreferredSize(new Dimension(100, 25));
 			comboBoxKategorije.addItem("Movies");
 			comboBoxKategorije.addItem("Countries");
@@ -211,6 +248,14 @@ public class GlavniProzor extends JFrame {
 			lblPrazanProstor4.setPreferredSize(new Dimension(170, 140));
 		}
 		return lblPrazanProstor4;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setPreferredSize(new Dimension(480, 21));
+			scrollPane.setViewportView(getTable());
+		}
+		return scrollPane;
 	}
 }
 
