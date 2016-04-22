@@ -5,11 +5,13 @@ import java.util.Random;
 
 import javax.swing.JDialog;
 
+import baza.Igrac;
 import baza.Kategorije;
 import gui.GlavniProzor;
 import gui.Pobeda;
 import gui.PocetniProzor;
 import gui.Poraz;
+import gui.Score;
 
 public class GUIKontrolor {
 	
@@ -93,5 +95,19 @@ public class GUIKontrolor {
 				recZaPrikaz+=' ';
 		}
 		return recZaPrikaz;
+	}
+	
+	public static void prozorZaScore(final Igrac igrac){
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Score frame = new Score();
+					frame.setIgrac(igrac);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
