@@ -51,6 +51,7 @@ public class GlavniProzor extends JFrame {
 	private JTable table;
 	private static char[] recZaPrikazNiz = "Default word".toCharArray();
 	private JScrollPane scrollPane;
+	private JButton btnTry;
 
 	public GlavniProzor() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GlavniProzor.class.getResource("/resursi/ghosticon.png")));
@@ -92,6 +93,7 @@ public class GlavniProzor extends JFrame {
 			panelZaDugmice.add(getLabel_1());
 			panelZaDugmice.add(getLblTryTheWhole());
 			panelZaDugmice.add(getTextField());
+			panelZaDugmice.add(getBtnTry());
 			panelZaDugmice.add(getLabel_2());
 			panelZaDugmice.add(getBtnExitGame());
 		}
@@ -177,10 +179,30 @@ public class GlavniProzor extends JFrame {
 			comboBoxSlova.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String slovoString = comboBoxSlova.getSelectedItem().toString();
+					// nema toChar(), pa posto ima samo jedno slovo, uzeo sam to
+					// na prvom mestu
 					char slovo = slovoString.charAt(0);
 					char[] recZaPrikazNiz = GUIKontrolor.dodajSlovo(slovo);
-					if (GUIKontrolor.brojPromasaja != 0) {
-						
+					// nadje se indeks slova, pa se Item na tom mestu brise
+					// posle, ali ovo obrise ceo comboBox, skini komentar pa vidi xD
+					//int indeks = comboBoxSlova.getSelectedIndex();
+					//comboBoxSlova.remove(indeks);
+					if (GUIKontrolor.brojPromasaja > 0) {
+						BufferedImage slika;
+						// ovo sve baca exception ne znam sto, dole ne baca!
+						// try {
+						// ovaj deo mi pravi problem, ne znam da li moze
+						// tako da se napravi String za putanju
+						// u slucaju da je broj promasaja veci od treba da
+						// se promeni slika, ali ovo ne radi nikako :/
+						// slika = ImageIO.read(this.getClass()
+						// .getResource("/resursi/vesala" +
+						// (GUIKontrolor.brojPromasaja + 1) + ".jpg"));
+						// JLabel ikona = new JLabel(new ImageIcon(slika));
+						// panelZaSliku.add(ikona);
+						// } catch (IOException ex) {
+						// ex.printStackTrace();
+						// }
 					}
 					table.setModel(new TabelaZaRec(recZaPrikazNiz));
 					table.setTableHeader(null);
@@ -281,5 +303,33 @@ public class GlavniProzor extends JFrame {
 			scrollPane.setViewportView(getTable());
 		}
 		return scrollPane;
+	}
+
+	private JButton getBtnTry() {
+		if (btnTry == null) {
+			btnTry = new JButton("Try!");
+			btnTry.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontrolor.probajCeluRec(textField.getText());
+					if (GUIKontrolor.brojPromasaja > 0) {
+						BufferedImage slika;
+						try {
+							// ovaj deo mi pravi problem, ne znam da li moze
+							// tako da se napravi String za putanju
+							// u slucaju da je broj promasaja veci od treba da
+							// se promeni slika, ali ovo ne radi nikako :/
+							slika = ImageIO.read(this.getClass()
+									.getResource("/resursi/vesala" + (GUIKontrolor.brojPromasaja + 1) + ".jpg"));
+							JLabel ikona = new JLabel(new ImageIcon(slika));
+							panelZaSliku.add(ikona);
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
+			});
+			btnTry.setPreferredSize(new Dimension(100, 25));
+		}
+		return btnTry;
 	}
 }
