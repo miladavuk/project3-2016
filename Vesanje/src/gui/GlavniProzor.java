@@ -35,8 +35,7 @@ public class GlavniProzor extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panelZaRec;
-	private JPanel panelZaDugmice;
-	private JPanel panelZaSliku;
+	private JPanel panelZaDugmice;	
 	private JLabel lblKategorija;
 	private JComboBox comboBoxKategorije;
 	private JLabel lblIzaberiSlovo;
@@ -52,8 +51,12 @@ public class GlavniProzor extends JFrame {
 	private static char[] recZaPrikazNiz = "Default word".toCharArray();
 	private JScrollPane scrollPane;
 	private JButton btnTry;
+	private JPanel panelZaSliku;
+	private JLabel jlblSlika;
+	
 
 	public GlavniProzor() {
+		GUIKontrolor.brojPromasaja=0;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GlavniProzor.class.getResource("/resursi/ghosticon.png")));
 		setResizable(false);
 		setPreferredSize(new Dimension(1000, 2000));
@@ -67,6 +70,7 @@ public class GlavniProzor extends JFrame {
 		contentPane.add(getPanelZaRec(), BorderLayout.SOUTH);
 		contentPane.add(getPanelZaDugmice(), BorderLayout.EAST);
 		contentPane.add(getPanelZaSliku(), BorderLayout.CENTER);
+		
 	}
 
 	private JPanel getPanelZaRec() {
@@ -100,22 +104,6 @@ public class GlavniProzor extends JFrame {
 		return panelZaDugmice;
 	}
 
-	private JPanel getPanelZaSliku() {
-		if (panelZaSliku == null)
-			panelZaSliku = new JPanel();
-
-		BufferedImage slika;
-		try {
-			slika = ImageIO.read(this.getClass().getResource("/resursi/vesala1.jpg"));
-			JLabel ikona = new JLabel(new ImageIcon(slika));
-			panelZaSliku.add(ikona);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return panelZaSliku;
-	}
 
 	private JTable getTable() {
 		if (table == null) {
@@ -144,6 +132,8 @@ public class GlavniProzor extends JFrame {
 			comboBoxKategorije = new JComboBox();
 			comboBoxKategorije.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					GUIKontrolor.brojPromasaja=0;
+					
 					String kategorija = comboBoxKategorije.getSelectedItem().toString();
 					String recZaPrikaz = GUIKontrolor.vratiString(kategorija);
 					recZaPrikazNiz = recZaPrikaz.toCharArray();
@@ -178,35 +168,27 @@ public class GlavniProzor extends JFrame {
 			comboBoxSlova = new JComboBox();
 			comboBoxSlova.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String slovoString = comboBoxSlova.getSelectedItem().toString();
-					// nema toChar(), pa posto ima samo jedno slovo, uzeo sam to
-					// na prvom mestu
+					String slovoString = comboBoxSlova.getSelectedItem().toString().trim();					
 					char slovo = slovoString.charAt(0);
-					char[] recZaPrikazNiz = GUIKontrolor.dodajSlovo(slovo);
-					// nadje se indeks slova, pa se Item na tom mestu brise
-					// posle, ali ovo obrise ceo comboBox, skini komentar pa vidi xD
-					//int indeks = comboBoxSlova.getSelectedIndex();
-					//comboBoxSlova.remove(indeks);
-					if (GUIKontrolor.brojPromasaja > 0) {
-						BufferedImage slika;
-						// ovo sve baca exception ne znam sto, dole ne baca!
-						// try {
-						// ovaj deo mi pravi problem, ne znam da li moze
-						// tako da se napravi String za putanju
-						// u slucaju da je broj promasaja veci od treba da
-						// se promeni slika, ali ovo ne radi nikako :/
-						// slika = ImageIO.read(this.getClass()
-						// .getResource("/resursi/vesala" +
-						// (GUIKontrolor.brojPromasaja + 1) + ".jpg"));
-						// JLabel ikona = new JLabel(new ImageIcon(slika));
-						// panelZaSliku.add(ikona);
-						// } catch (IOException ex) {
-						// ex.printStackTrace();
-						// }
+					//Milada: ako slovo postoji u reci, dodaj u GLOBALNU promenljivu					
+					if(GUIKontrolor.trazenaRec.indexOf(slovo)!=-1){
+						recZaPrikazNiz=GUIKontrolor.dodajSlovo(slovo,recZaPrikazNiz);
+						table.setModel(new TabelaZaRec(recZaPrikazNiz));
+						table.setTableHeader(null);						
+					}else{ 
+						GUIKontrolor.brojPromasaja++;
+						promeniSliku();
 					}
-					table.setModel(new TabelaZaRec(recZaPrikazNiz));
-					table.setTableHeader(null);
+					if(GUIKontrolor.brojPromasaja==6){
+						GUIKontrolor.brojPromasaja=0;
+						GUIKontrolor.prikaziPoraz();
+					}
+					if(recZaPrikazNiz.toString().equals(GUIKontrolor.trazenaRec))
+						GUIKontrolor.prikaziPobedu();					
+					
 				}
+
+				
 			});
 			comboBoxSlova.addItem('A');
 			comboBoxSlova.addItem('B');
@@ -310,26 +292,65 @@ public class GlavniProzor extends JFrame {
 			btnTry = new JButton("Try!");
 			btnTry.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					GUIKontrolor.probajCeluRec(textField.getText());
-					if (GUIKontrolor.brojPromasaja > 0) {
-						BufferedImage slika;
-						try {
-							// ovaj deo mi pravi problem, ne znam da li moze
-							// tako da se napravi String za putanju
-							// u slucaju da je broj promasaja veci od treba da
-							// se promeni slika, ali ovo ne radi nikako :/
-							slika = ImageIO.read(this.getClass()
-									.getResource("/resursi/vesala" + (GUIKontrolor.brojPromasaja + 1) + ".jpg"));
-							JLabel ikona = new JLabel(new ImageIcon(slika));
-							panelZaSliku.add(ikona);
-						} catch (IOException ex) {
-							ex.printStackTrace();
-						}
+					GUIKontrolor.probajCeluRec(textField.getText().toString());
+					if(GUIKontrolor.brojPromasaja>0)
+						promeniSliku();					
+					if(GUIKontrolor.brojPromasaja==6){
+						GUIKontrolor.brojPromasaja=0;
+						GUIKontrolor.prikaziPoraz();
 					}
 				}
+				
 			});
 			btnTry.setPreferredSize(new Dimension(100, 25));
 		}
 		return btnTry;
 	}
-}
+	
+	
+		private JLabel getJlblSlika() {
+		if (jlblSlika == null) {
+			jlblSlika = new JLabel("");			
+			jlblSlika.setIcon(new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala1.jpg")));
+			
+		}
+		return jlblSlika;
+	}
+	private void promeniSliku() {		
+			
+			String putanja=null;
+			
+			switch(GUIKontrolor.brojPromasaja){
+			
+			case 0: putanja = "/resursi/vesala1.jpg";
+					break;			
+			case 1: putanja = "/resursi/vesala2.jpg";
+					break;
+			case 2: putanja = "/resursi/vesala3.jpg";
+			        break;
+			case 3: putanja = "/resursi/vesala4.jpg";
+					break;
+			case 4: putanja = "/resursi/vesala5.jpg";
+					break;
+			case 5: putanja = "/resursi/vesala6.jpg";
+					break;
+			case 6: putanja = "/resursi/vesala7.jpg";
+					break;     
+			
+			}	
+			jlblSlika.removeAll();
+			jlblSlika.setIcon(new ImageIcon(GlavniProzor.class.getResource(putanja)));
+			jlblSlika.revalidate();
+			jlblSlika.repaint();
+			
+	}
+
+		private JPanel getPanelZaSliku() {
+			if (panelZaSliku == null) {
+				panelZaSliku = new JPanel();
+				panelZaSliku.add(getJlblSlika());
+			}
+			return panelZaSliku;
+		}
+	}
+

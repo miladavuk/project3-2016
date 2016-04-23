@@ -72,7 +72,7 @@ public class GUIKontrolor {
 		try {
 			Poraz dialog = new Poraz();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			dialog.setVisible(true);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -124,76 +124,22 @@ public class GUIKontrolor {
 		});
 	}
 
-	public static char[] dodajSlovo(char slovo) {
-		if (trazenaRec != null) {
-			// ta rec koja ce da se prikaze u tabeli posle
-			char[] recZaPrikazNiz = new char[trazenaRec.length()];
-			// pretrazuje se lista koriscenih slova da se vidi da li je negde u
-			// reci ima, i u slucaju da je tako, dodaje se na to mesto u nizu
-			for (int i = 0; i < recZaPrikazNiz.length; i++) {
-				for (int j = 0; j < koriscenaSlova.size(); j++) {
-					if (trazenaRec.charAt(i) == koriscenaSlova.get(j)) {
-						recZaPrikazNiz[i] = koriscenaSlova.get(j);
-					} else {
-						recZaPrikazNiz[i] = '*';
-					}
-				}
+public static char[] dodajSlovo(char slovo, char[] recZaPrikazNiz) {	
+	
+		/*Milada: koristi se globalna promenljiva! ne ubacuju se '*' (one su vec tu)
+		 * zato sto bi se pri svakom odabiru slova prikazalo samo to slovo i zvezdice*/
+		
+		for(int i = 0; i<trazenaRec.length();i++){
+			if(trazenaRec.charAt(i)==slovo){
+				recZaPrikazNiz[i]=slovo;					
+		}
 			}
-			// boolen koji proverava ima li slova u reci
-			boolean postoji = false;
-			for (int i = 0; i < trazenaRec.length(); i++) {
-				if (trazenaRec.charAt(i) == slovo) {
-					recZaPrikazNiz[i] = slovo;
-					postoji = true;
-				}
-			}
-			// slovo se dodaje u listu koriscenih slova
+		if(!koriscenaSlova.contains(slovo))
 			koriscenaSlova.add(slovo);
-			// ako je broj promasaja manji od 6 i nema slova u reci, povecava se
-			// broj promasaja, a ako je jednak 6 kad bi se povecao za 1 onda se
-			// otvara JDialog Poraz
-			if (!postoji && brojPromasaja < 6) {
-				brojPromasaja += 1;
-			} else if (brojPromasaja + 1 == 6) {
-				Poraz p = new Poraz();
-				p.setVisible(true);
-			}
-
-			// onaj niz (koji za tabelu sluzi) sam pretvorio u rec da bih je
-			// lakse poredio
-			String recZaPrikaz = "";
-			for (int i = 0; i < recZaPrikazNiz.length; i++) {
-				recZaPrikaz += recZaPrikazNiz[i];
-			}
-			// ako su jednake, otvara se JDialog Pobeda
-			if (recZaPrikaz.equals(trazenaRec)) {
-				Pobeda p = new Pobeda();
-				p.setVisible(true);
-			}
-			// vraca novu rec (umesto * su slova koja su pogodjena) i smesta se
-			// u tabelu (nekako)
-			return recZaPrikazNiz;
-		} else {
-			throw new RuntimeException("");
-		}
+			
+		return recZaPrikazNiz;
+		
 	}
-
-	// dodavanje novog slova u listu
-	public static void koriscenaSlova(char slovo) {
-		koriscenaSlova.add(slovo);
-	}
-
-	// ako pogodi celu rec otvara se Pobeda dijalog, a u suprotnom povecava se
-	// broj promasaja za 1F
-	public static void probajCeluRec(String rec) {
-		if (rec.equals(trazenaRec)) {
-			Pobeda p = new Pobeda();
-			p.setVisible(true);
-		} else {
-			brojPromasaja++;
-		}
-	}
-
 	public static void pozoviInstrukcije() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -209,12 +155,22 @@ public class GUIKontrolor {
 	}
 
 	public static void ugasiAplikaciju() {
+		//Milada:promenjeno na engleski jer pravimo aplikaciju na engleskom! :)
 		int opcija = JOptionPane.showConfirmDialog(pocetniProzor.getContentPane(),
-				"Da li ste sigurni da zelite da zatvorite aplikaciju?", "Izlazak", JOptionPane.YES_NO_OPTION);
+				"Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
 
 		if (opcija == JOptionPane.YES_OPTION) {
 			igraci.serijalizujIgrace();
 			System.exit(0);
 		}
+	}
+
+	public static void probajCeluRec(String text) {
+		
+		if(text.equals(trazenaRec))
+			prikaziPobedu();
+		else brojPromasaja++;
+			
+		
 	}
 }
