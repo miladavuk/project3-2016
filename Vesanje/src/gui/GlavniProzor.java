@@ -1,38 +1,37 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Vector;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableModel;
 
 import baza.TabelaZaRec;
 import gui.kontrolor.GUIKontrolor;
-
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import gui.kontrolor.Igrica;
 
 public class GlavniProzor extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panelZaRec;
 	private JPanel panelZaDugmice;	
@@ -48,22 +47,28 @@ public class GlavniProzor extends JFrame {
 	private JButton btnExitGame;
 	private JLabel lblPrazanProstor4;
 	private JTable table;
-	private static char[] recZaPrikazNiz = "Default word".toCharArray();
+	private char[] recZaPrikazNiz = "Default word".toCharArray();
 	private JScrollPane scrollPane;
 	private JButton btnTry;
 	private JPanel panelZaSliku;
-	private JLabel jlblSlika;
+	private JLabel jlblSlika1;
 	private JButton btnGiveUp;
-	
+	private JPanel jpnlIgrac;
+	private JLabel jlblPlayer;
+	private JLabel jlblImeIgraca;
+	private Igrica igrica;
+	private JLabel jlblSlika7;
+	private JButton btnOk;
 
 	public GlavniProzor() {
-		GUIKontrolor.brojPromasaja=0;
+		igrica = new Igrica(GUIKontrolor.vratiTrenutnogIgraca());
+		//GUIKontrolor.brojPromasaja=0;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GlavniProzor.class.getResource("/resursi/ghosticon.png")));
 		setResizable(false);
 		setPreferredSize(new Dimension(1000, 2000));
 		setTitle("Hangman");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 509, 569);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 509, 598);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,6 +76,7 @@ public class GlavniProzor extends JFrame {
 		contentPane.add(getPanelZaRec(), BorderLayout.SOUTH);
 		contentPane.add(getPanelZaDugmice(), BorderLayout.EAST);
 		contentPane.add(getPanelZaSliku(), BorderLayout.CENTER);
+		contentPane.add(getJpnlIgrac(), BorderLayout.NORTH);
 		
 	}
 
@@ -95,6 +101,7 @@ public class GlavniProzor extends JFrame {
 			panelZaDugmice.add(getLblPrazanProstor2());
 			panelZaDugmice.add(getLblIzaberiSlovo());
 			panelZaDugmice.add(getComboBoxSlova());
+			panelZaDugmice.add(getBtnOk());
 			panelZaDugmice.add(getLabel_1());
 			panelZaDugmice.add(getLblTryTheWhole());
 			panelZaDugmice.add(getTextField());
@@ -110,6 +117,8 @@ public class GlavniProzor extends JFrame {
 	private JTable getTable() {
 		if (table == null) {
 			table = new JTable();
+			table.setForeground(Color.BLUE);
+			table.setFont(new Font("Tahoma", Font.BOLD, 16));
 			table.setPreferredSize(new Dimension(480, 18));
 			table.setFillsViewportHeight(true);
 			table.setShowHorizontalLines(false);
@@ -134,14 +143,19 @@ public class GlavniProzor extends JFrame {
 			comboBoxKategorije = new JComboBox();
 			comboBoxKategorije.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GUIKontrolor.brojPromasaja=0;
+					//GUIKontrolor.brojPromasaja=0;
 					
 					String kategorija = comboBoxKategorije.getSelectedItem().toString();
-					String recZaPrikaz = GUIKontrolor.vratiString(kategorija);
-					recZaPrikazNiz = recZaPrikaz.toCharArray();
-					table.setModel(new TabelaZaRec(recZaPrikazNiz));
-					table.setTableHeader(null);
-
+					String recZaPrikaz = igrica.vratiString(kategorija);
+					if(recZaPrikaz.equals("greska")) JOptionPane.showMessageDialog(getContentPane(), "You have guessed all from that category, please choose the other one!");
+					else{
+						recZaPrikazNiz = recZaPrikaz.toCharArray();
+						table.setModel(new TabelaZaRec(recZaPrikaz.toCharArray()));
+						table.setTableHeader(null);
+					}
+					
+					
+					//comboBoxKategorije.setEditable(false);
 				}
 			});
 			comboBoxKategorije.setPreferredSize(new Dimension(100, 25));
@@ -160,7 +174,7 @@ public class GlavniProzor extends JFrame {
 		if (lblIzaberiSlovo == null) {
 			lblIzaberiSlovo = new JLabel("Pick a letter:");
 			lblIzaberiSlovo.setHorizontalAlignment(SwingConstants.CENTER);
-			lblIzaberiSlovo.setPreferredSize(new Dimension(100, 25));
+			lblIzaberiSlovo.setPreferredSize(new Dimension(180, 25));
 		}
 		return lblIzaberiSlovo;
 	}
@@ -168,30 +182,6 @@ public class GlavniProzor extends JFrame {
 	private JComboBox getComboBoxSlova() {
 		if (comboBoxSlova == null) {
 			comboBoxSlova = new JComboBox();
-			comboBoxSlova.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					String slovoString = comboBoxSlova.getSelectedItem().toString().trim();					
-					char slovo = slovoString.charAt(0);
-					//Milada: ako slovo postoji u reci, dodaj u GLOBALNU promenljivu					
-					if(GUIKontrolor.trazenaRec.indexOf(slovo)!=-1){
-						recZaPrikazNiz=GUIKontrolor.dodajSlovo(slovo,recZaPrikazNiz);
-						table.setModel(new TabelaZaRec(recZaPrikazNiz));
-						table.setTableHeader(null);						
-					}else{ 
-						GUIKontrolor.brojPromasaja++;
-						promeniSliku();
-					}
-					if(GUIKontrolor.brojPromasaja==6){
-						GUIKontrolor.brojPromasaja=0;
-						GUIKontrolor.prikaziPoraz();
-					}
-					if(recZaPrikazNiz.toString().equals(GUIKontrolor.trazenaRec))
-						GUIKontrolor.prikaziPobedu();					
-					
-				}
-
-				
-			});
 			comboBoxSlova.addItem('A');
 			comboBoxSlova.addItem('B');
 			comboBoxSlova.addItem('C');
@@ -280,7 +270,7 @@ public class GlavniProzor extends JFrame {
 	private JLabel getLabel_2() {
 		if (lblPrazanProstor4 == null) {
 			lblPrazanProstor4 = new JLabel("");
-			lblPrazanProstor4.setPreferredSize(new Dimension(170, 140));
+			lblPrazanProstor4.setPreferredSize(new Dimension(170, 130));
 		}
 		return lblPrazanProstor4;
 	}
@@ -299,12 +289,14 @@ public class GlavniProzor extends JFrame {
 			btnTry = new JButton("Try!");
 			btnTry.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					GUIKontrolor.probajCeluRec(textField.getText().toString());
-					if(GUIKontrolor.brojPromasaja>0)
-						promeniSliku();					
-					if(GUIKontrolor.brojPromasaja==6){
-						GUIKontrolor.brojPromasaja=0;
-						GUIKontrolor.prikaziPoraz();
+					igrica.probajCeluRec(textField.getText().toString().trim());
+					if(igrica.getBrojPromasaja()>0){
+				//		promeniSliku();	
+						igrica.povecajBrojPromasaja();;
+					}
+					if(igrica.getBrojPromasaja()==6){
+						igrica.igracJeIzgubio();
+						dispose();
 					}
 				}
 				
@@ -315,47 +307,79 @@ public class GlavniProzor extends JFrame {
 	}
 	
 	
-		private JLabel getJlblSlika() {
-		if (jlblSlika == null) {
-			jlblSlika = new JLabel("");			
-			jlblSlika.setIcon(new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala1.jpg")));
+		private JLabel getJlblSlika1() {
+		if (jlblSlika1 == null) {
+			jlblSlika1 = new JLabel("");			
+			jlblSlika1.setIcon(new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala1.jpg")));
 			
 		}
-		return jlblSlika;
+		return jlblSlika1;
 	}
-	private void promeniSliku() {		
-			
-			String putanja=null;
-			
-			switch(GUIKontrolor.brojPromasaja){
-			
-			case 0: putanja = "/resursi/vesala1.jpg";
-					break;			
-			case 1: putanja = "/resursi/vesala2.jpg";
-					break;
-			case 2: putanja = "/resursi/vesala3.jpg";
-			        break;
-			case 3: putanja = "/resursi/vesala4.jpg";
-					break;
-			case 4: putanja = "/resursi/vesala5.jpg";
-					break;
-			case 5: putanja = "/resursi/vesala6.jpg";
-					break;
-			case 6: putanja = "/resursi/vesala7.jpg";
-					break;     
-			
-			}	
-			jlblSlika.removeAll();
-			jlblSlika.setIcon(new ImageIcon(GlavniProzor.class.getResource(putanja)));
-			jlblSlika.revalidate();
-			jlblSlika.repaint();
-			
-	}
+//	private void promeniSliku() {		
+//			
+////			String putanja=null;
+////			JLabel jlblSlika1 = new JLabel();
+//			switch(igrica.getBrojPromasaja()){
+//			
+//			case 0: {
+//				break;	
+//			}
+//							
+//			case 1: {
+//				jlblSlika1.setVisible(false);
+//				jlblSlika2.setVisible(true);
+//				break;
+//			}
+//			case 2: {
+//				jlblSlika2.setVisible(false);
+//				jlblSlika3.setVisible(true);
+//				break;
+//			}
+//			        
+//			case 3: {
+//				jlblSlika3.setVisible(false);
+//				jlblSlika4.setVisible(true);
+//				break;
+//			}
+//					
+//			case 4: {
+//				jlblSlika4.setVisible(false);
+//				jlblSlika5.setVisible(true);
+//				break;
+//			}
+//					
+//			case 5: {
+//				jlblSlika5.setVisible(false);
+//				jlblSlika6.setVisible(true);
+//				break;
+//			}
+//					
+//			case 6: {
+//				jlblSlika6.setVisible(false);
+//				jlblSlika7.setVisible(true);
+//				break; 
+//			}
+//					    
+//			default:{
+//				
+//				break; 
+//			}
+//					
+//			}	
+//			
+//		//	jlblSlika1.setIcon(new ImageIcon(GlavniProzor.class.getResource(putanja)));
+////			jlblSlika1.revalidate();
+////			jlblSlika1.repaint();
+//			//panelZaSliku.removeAll();
+//		//	panelZaSliku.add(jlblSlika1);
+//			
+//			
+//	}
 
 		private JPanel getPanelZaSliku() {
 			if (panelZaSliku == null) {
 				panelZaSliku = new JPanel();
-				panelZaSliku.add(getJlblSlika());
+				panelZaSliku.add(getJlblSlika1());
 			}
 			return panelZaSliku;
 		}
@@ -370,6 +394,78 @@ public class GlavniProzor extends JFrame {
 			btnGiveUp.setPreferredSize(new Dimension(100, 25));
 		}
 		return btnGiveUp;
+	}
+	private JPanel getJpnlIgrac() {
+		if (jpnlIgrac == null) {
+			jpnlIgrac = new JPanel();
+			jpnlIgrac.setPreferredSize(new Dimension(10, 40));
+			jpnlIgrac.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			jpnlIgrac.add(getJlblPlayer());
+			jpnlIgrac.add(getJlblImeIgraca());
+		}
+		return jpnlIgrac;
+	}
+	private JLabel getJlblPlayer() {
+		if (jlblPlayer == null) {
+			jlblPlayer = new JLabel("Player:");
+			jlblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		}
+		return jlblPlayer;
+	}
+	private JLabel getJlblImeIgraca() {
+		if (jlblImeIgraca == null) {
+			jlblImeIgraca = new JLabel(igrica.getIgrac().getIme());
+			jlblImeIgraca.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			jlblImeIgraca.setForeground(Color.RED);
+		}
+		return jlblImeIgraca;
+	}
+	private JLabel getJlblSlika7() {
+		if (jlblSlika7 == null) {
+			jlblSlika7 = new JLabel("New label");
+			jlblSlika7.setIcon(new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala7.jpg")));
+			jlblSlika7.setVisible(false);
+		}
+		return jlblSlika7;
+	}
+	private JButton getBtnOk() {
+		if (btnOk == null) {
+			btnOk = new JButton("OK");
+			btnOk.setPreferredSize(new Dimension(50, 25));
+			btnOk.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					String slovoString = comboBoxSlova.getSelectedItem().toString().trim();	
+					char slovo = slovoString.charAt(0);
+					int index = comboBoxSlova.getSelectedIndex();
+					//Marina: Dodala sam da izbacuje iz comboboxa koriscena slova 
+					comboBoxSlova.removeItemAt(index);;
+					comboBoxSlova.revalidate();
+					//Milada: ako slovo postoji u reci, dodaj u GLOBALNU promenljivu	
+					if(igrica.getTrazenaRec().toUpperCase().indexOf(slovo)!=-1){
+						recZaPrikazNiz=igrica.dodajSlovo(slovo,recZaPrikazNiz);
+						table.setModel(new TabelaZaRec(recZaPrikazNiz));
+						table.setTableHeader(null);	
+						
+						
+					}else{ 
+						igrica.povecajBrojPromasaja();
+						//promeniSliku();
+					}
+					if(igrica.getBrojPromasaja()==6){
+						igrica.igracJeIzgubio();
+						dispose();
+					}
+					
+//Marina: Bio je ovde bag, recZaPrikazNiz kad se konvertuje u String daje adresu, a ne taj string
+					if(String.copyValueOf(recZaPrikazNiz).toUpperCase().equals(igrica.getTrazenaRec().toUpperCase())){
+						System.out.println("POBEDA");
+						igrica.igracJePobedio();
+						dispose();
+					}
+				}
+			});
+		}
+		return btnOk;
 	}
 	}
 

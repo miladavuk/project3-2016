@@ -36,8 +36,6 @@ public class GUIKontrolor {
 				try {
 					pocetniProzor = new PocetniProzor();
 					pocetniProzor.setVisible(true);
-					// Poraz p = new Poraz();
-					// p.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -78,39 +76,6 @@ public class GUIKontrolor {
 		}
 	}
 
-	public static String vratiString(String kategorija) {
-		Kategorije k = new Kategorije();
-		Random r = new Random();
-		int randomBroj = r.nextInt(20);
-		String recZaPrikaz = "";
-
-		if (kategorija.equalsIgnoreCase("movies")) {
-			
-			trazenaRec = k.getFilmovi()[randomBroj];
-		}
-		if (kategorija.equalsIgnoreCase("classical books")) {
-			trazenaRec = k.getKnjige()[randomBroj];
-		}
-		if (kategorija.equalsIgnoreCase("countries")) {
-			trazenaRec = k.getDrzave()[randomBroj];
-		}
-		if (kategorija.equalsIgnoreCase("hystoric people")) {
-			trazenaRec = k.getIstorijskeLicnosti()[randomBroj];
-		}
-		if (kategorija.equalsIgnoreCase("famous people")) {
-			trazenaRec = k.getPoznateLicnosti()[randomBroj];
-		}
-		if (kategorija.equalsIgnoreCase("famous brands")) {
-			trazenaRec = k.getBrendovi()[randomBroj];
-		}
-		for (int i = 0; i < trazenaRec.length(); i++) {
-			if (trazenaRec.charAt(i) != ' ')
-				recZaPrikaz += '*';
-			else
-				recZaPrikaz += ' ';
-		}
-		return recZaPrikaz;
-	}
 
 	public static void prozorZaScore() {
 		if(indexTrenutnogIgraca == -1){
@@ -129,22 +94,7 @@ public class GUIKontrolor {
 		});
 	}
 
-public static char[] dodajSlovo(char slovo, char[] recZaPrikazNiz) {	
-	
-		/*Milada: koristi se globalna promenljiva! ne ubacuju se '*' (one su vec tu)
-		 * zato sto bi se pri svakom odabiru slova prikazalo samo to slovo i zvezdice*/
-		
-		for(int i = 0; i<trazenaRec.length();i++){
-			if(trazenaRec.charAt(i)==slovo){
-				recZaPrikazNiz[i]=slovo;					
-		}
-			}
-		if(!koriscenaSlova.contains(slovo))
-			koriscenaSlova.add(slovo);
-			
-		return recZaPrikazNiz;
-		
-	}
+
 	public static void pozoviInstrukcije() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -161,6 +111,7 @@ public static char[] dodajSlovo(char slovo, char[] recZaPrikazNiz) {
 
 	public static void ugasiAplikaciju() {
 		//Milada:promenjeno na engleski jer pravimo aplikaciju na engleskom! :)
+		//Marina: Yeah, I forgot. xD
 		int opcija = JOptionPane.showConfirmDialog(pocetniProzor.getContentPane(),
 				"Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
 
@@ -168,15 +119,6 @@ public static char[] dodajSlovo(char slovo, char[] recZaPrikazNiz) {
 			igraci.serijalizujIgrace();
 			System.exit(0);
 		}
-	}
-
-	public static void probajCeluRec(String text) {
-		
-		if(text.equals(trazenaRec))
-			prikaziPobedu();
-		else brojPromasaja++;
-			
-		
 	}
 	
 	public static Igrac vratiTrenutnogIgraca(){
@@ -196,4 +138,5 @@ public static char[] dodajSlovo(char slovo, char[] recZaPrikazNiz) {
 		indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
 		return false;
 	}
+	
 }
