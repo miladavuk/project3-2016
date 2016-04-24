@@ -102,7 +102,10 @@ public class Igrica {
 		if (kategorija.equalsIgnoreCase("famous brands")) {
 			if(igrac.getBrendovi().size() >= 20) return "greska";
 			if(igrac.getBrendovi().contains(randomBroj)) trazenaRec = vratiString(kategorija);
-			trazenaRec = k.getBrendovi()[randomBroj];
+			else{
+				trazenaRec = k.getBrendovi()[randomBroj];
+				indexReci = randomBroj;
+			}
 		}
 		for (int i = 0; i < trazenaRec.length(); i++) {
 			if (trazenaRec.charAt(i) != ' ')
@@ -122,7 +125,6 @@ public class Igrica {
 		for(int i = 0; i< rec.length();i++){
 			if(rec.charAt(i) == slovo){
 				recZaPrikazNiz[i]=slovo;
-				System.out.println(slovo + "");
 			}
 		}
 //		if(!koriscenaSlova.contains(slovo))
@@ -144,30 +146,24 @@ public class Igrica {
 	
 	public void igracJePobedio(){
 		switch(kategorija){
-			case "Movies": {
+			case "Movies":
 				igrac.ubaciFilm(indexReci);
 				break;
-			}
-			case "Countries": {
+			case "Countries": 
 				igrac.ubaciDrzavu(indexReci);
 				break;
-			}
-			case "Classical books":{
+			case "Classical books":
 				igrac.ubaciKnjigu(indexReci);
 				break;
-			}
-			case "Hystoric people":{
+			case "Hystoric people":
 				igrac.ubaciIstorijskuLicnost(indexReci);
 				break;
-			}
-			case "Famous people":{
+			case "Famous people":
 				igrac.ubaciPoznatuLicnost(indexReci);
 				break;
-			}
-			case "Famous brands":{
+			case "Famous brands":
 				igrac.ubaciBrend(indexReci);
 				break;
-			}
 		}
 		GUIKontrolor.prikaziPobedu();
 	}

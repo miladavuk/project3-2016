@@ -15,7 +15,6 @@ public class TabelaZaRec extends AbstractTableModel {
 	public TabelaZaRec(char[] recZaPrikaz) {
 //		recZaPrikazNiz = new char[recZaPrikaz.length];
 		recZaPrikazNiz = recZaPrikaz;
-		System.out.println(recZaPrikazNiz);
 		fireTableDataChanged();
 	}
 

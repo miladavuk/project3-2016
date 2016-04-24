@@ -8,6 +8,9 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -59,8 +62,15 @@ public class GlavniProzor extends JFrame {
 	private Igrica igrica;
 	private JLabel jlblSlika7;
 	private JButton btnOk;
+	private ImageIcon image1;
+	private ImageIcon image2;
+	private ImageIcon image3;
+	private ImageIcon image4;
+	private ImageIcon image5;
+	private ImageIcon image7;
+	private ImageIcon image6;
 
-	public GlavniProzor() {
+	public GlavniProzor() throws IOException {
 		igrica = new Igrica(GUIKontrolor.vratiTrenutnogIgraca());
 		//GUIKontrolor.brojPromasaja=0;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GlavniProzor.class.getResource("/resursi/ghosticon.png")));
@@ -77,7 +87,13 @@ public class GlavniProzor extends JFrame {
 		contentPane.add(getPanelZaDugmice(), BorderLayout.EAST);
 		contentPane.add(getPanelZaSliku(), BorderLayout.CENTER);
 		contentPane.add(getJpnlIgrac(), BorderLayout.NORTH);
-		
+		image1 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala1.jpg"));
+		image2 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala2.jpg"));
+		image3 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala3.jpg"));	
+		image4 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala4.jpg"));
+		image5 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala5.jpg"));
+		image6 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala6.jpg"));
+		image7 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala7.jpg"));
 	}
 
 	private JPanel getPanelZaRec() {
@@ -182,6 +198,7 @@ public class GlavniProzor extends JFrame {
 	private JComboBox getComboBoxSlova() {
 		if (comboBoxSlova == null) {
 			comboBoxSlova = new JComboBox();
+			comboBoxSlova.setPreferredSize(new Dimension(40, 25));
 			comboBoxSlova.addItem('A');
 			comboBoxSlova.addItem('B');
 			comboBoxSlova.addItem('C');
@@ -291,8 +308,8 @@ public class GlavniProzor extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					igrica.probajCeluRec(textField.getText().toString().trim());
 					if(igrica.getBrojPromasaja()>0){
-				//		promeniSliku();	
-						igrica.povecajBrojPromasaja();;
+						promeniSliku();	
+						igrica.povecajBrojPromasaja();
 					}
 					if(igrica.getBrojPromasaja()==6){
 						igrica.igracJeIzgubio();
@@ -315,66 +332,33 @@ public class GlavniProzor extends JFrame {
 		}
 		return jlblSlika1;
 	}
-//	private void promeniSliku() {		
-//			
-////			String putanja=null;
-////			JLabel jlblSlika1 = new JLabel();
-//			switch(igrica.getBrojPromasaja()){
-//			
-//			case 0: {
-//				break;	
-//			}
-//							
-//			case 1: {
-//				jlblSlika1.setVisible(false);
-//				jlblSlika2.setVisible(true);
-//				break;
-//			}
-//			case 2: {
-//				jlblSlika2.setVisible(false);
-//				jlblSlika3.setVisible(true);
-//				break;
-//			}
-//			        
-//			case 3: {
-//				jlblSlika3.setVisible(false);
-//				jlblSlika4.setVisible(true);
-//				break;
-//			}
-//					
-//			case 4: {
-//				jlblSlika4.setVisible(false);
-//				jlblSlika5.setVisible(true);
-//				break;
-//			}
-//					
-//			case 5: {
-//				jlblSlika5.setVisible(false);
-//				jlblSlika6.setVisible(true);
-//				break;
-//			}
-//					
-//			case 6: {
-//				jlblSlika6.setVisible(false);
-//				jlblSlika7.setVisible(true);
-//				break; 
-//			}
-//					    
-//			default:{
-//				
-//				break; 
-//			}
-//					
-//			}	
-//			
-//		//	jlblSlika1.setIcon(new ImageIcon(GlavniProzor.class.getResource(putanja)));
-////			jlblSlika1.revalidate();
-////			jlblSlika1.repaint();
-//			//panelZaSliku.removeAll();
-//		//	panelZaSliku.add(jlblSlika1);
-//			
-//			
-//	}
+	private void promeniSliku() {		
+			
+		switch(igrica.getBrojPromasaja()){
+			
+			case 0:
+				jlblSlika1.setIcon(image1);
+				break;					
+			case 1: 
+				jlblSlika1.setIcon(image2);
+				break;
+			case 2:
+				jlblSlika1.setIcon(image3);
+				break;     
+			case 3:
+				jlblSlika1.setIcon(image4);
+				break;
+			case 4: 
+				jlblSlika1.setIcon(image5);
+				break;		
+			case 5: 
+				jlblSlika1.setIcon(image6);
+				break;
+			case 6: 
+				jlblSlika1.setIcon(image7);
+				break; 
+		}						
+	}
 
 		private JPanel getPanelZaSliku() {
 			if (panelZaSliku == null) {
@@ -431,7 +415,7 @@ public class GlavniProzor extends JFrame {
 	private JButton getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new JButton("OK");
-			btnOk.setPreferredSize(new Dimension(50, 25));
+			btnOk.setPreferredSize(new Dimension(70, 25));
 			btnOk.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					String slovoString = comboBoxSlova.getSelectedItem().toString().trim();	
@@ -449,7 +433,7 @@ public class GlavniProzor extends JFrame {
 						
 					}else{ 
 						igrica.povecajBrojPromasaja();
-						//promeniSliku();
+						promeniSliku();
 					}
 					if(igrica.getBrojPromasaja()==6){
 						igrica.igracJeIzgubio();
@@ -458,7 +442,6 @@ public class GlavniProzor extends JFrame {
 					
 //Marina: Bio je ovde bag, recZaPrikazNiz kad se konvertuje u String daje adresu, a ne taj string
 					if(String.copyValueOf(recZaPrikazNiz).toUpperCase().equals(igrica.getTrazenaRec().toUpperCase())){
-						System.out.println("POBEDA");
 						igrica.igracJePobedio();
 						dispose();
 					}

@@ -17,7 +17,6 @@ public class Igraci implements Serializable{
 	public Igraci(){
 		igraci = new LinkedList<>();
 		deserijalizujIgrace();
-		ispisiIgrace();
 	}
 	
 	public boolean daLiPostoji(String ime){
