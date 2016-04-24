@@ -4,14 +4,20 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Igraci {
+public class Igraci implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LinkedList<Igrac> igraci;
 	
 	public Igraci(){
 		igraci = new LinkedList<>();
 		deserijalizujIgrace();
+		ispisiIgrace();
 	}
 	
 	public boolean daLiPostoji(String ime){
@@ -21,33 +27,25 @@ public class Igraci {
 		return false;
 	}
 	
-	public boolean incijalizujIgraca(String ime){
-		if(!daLiPostoji(ime)) {
-			igraci.add(new Igrac(ime));
-			return true;
-		}
-		return false;
+	public void dodajIgraca(String ime){
+		igraci.add(new Igrac(ime));
 	}
+
 	
 	public void serijalizujIgrace(){
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Igraci.ser"))){
-			for (Igrac igrac : igraci) {
-				out.writeObject(igrac);
-			}
+			out.writeObject(igraci);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Nije uspelo serijalizovanje!");
 		}
 
 	}
 	
 	public void deserijalizujIgrace(){
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("Igraci.ser"))){
-			while(in.available() > 0){
-				igraci.add((Igrac)in.readObject());
-			}
+			igraci.addAll((LinkedList<Igrac>)in.readObject());			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Nije uspelo ocitavanje!");
 		}
 	}
 	
@@ -60,5 +58,11 @@ public class Igraci {
 	
 	public Igrac vratiIgraca(int index){
 		return igraci.get(index);
+	}
+	
+	public void ispisiIgrace(){
+		for (Igrac igrac : igraci) {
+			System.out.println(igrac.getIme());
+		}
 	}
 }

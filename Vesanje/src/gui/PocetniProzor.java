@@ -154,12 +154,12 @@ public class PocetniProzor extends JFrame {
 	private JButton getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new JButton("OK");
-			btnOk.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			btnOk.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
 					String igrac = jtxtPlayer.getText();
 					if(igrac.isEmpty())jlblError.setText("You didn't enter any name!");
-					else if(GUIKontrolor.igraci.incijalizujIgraca(igrac)) jlblError.setText("New player is created!");
+					else if(GUIKontrolor.incijalizujIgraca(igrac)) jlblError.setText("New player is created!");
+					else jlblError.setText("Welcome back " + igrac + "!");
 				}
 			});
 			btnOk.setPreferredSize(new Dimension(50, 30));

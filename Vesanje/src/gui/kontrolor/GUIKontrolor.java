@@ -185,4 +185,14 @@ public static char[] dodajSlovo(char slovo, char[] recZaPrikazNiz) {
 	public static void upozoriDaNijeIzabranIgrac(){
 		JOptionPane.showMessageDialog(pocetniProzor.getContentPane(), "You haven't chosen a player!");
 	}
+	
+	public static boolean incijalizujIgraca(String ime){
+		if(!igraci.daLiPostoji(ime)) {
+			igraci.dodajIgraca(ime);
+			indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
+			return true;
+		}
+		indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
+		return false;
+	}
 }

@@ -47,7 +47,7 @@ public class Score extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Score.class.getResource("/resursi/ghosticon.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 576, 175);
+		setBounds(100, 100, 576, 168);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -100,7 +100,7 @@ public class Score extends JFrame {
 				}
 			});
 			btnOk.setAlignmentX(Component.RIGHT_ALIGNMENT);
-			btnOk.setPreferredSize(new Dimension(47, 30));
+			btnOk.setPreferredSize(new Dimension(55, 30));
 		}
 		return btnOk;
 	}
