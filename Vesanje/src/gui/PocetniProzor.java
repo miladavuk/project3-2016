@@ -88,8 +88,9 @@ public class PocetniProzor extends JFrame {
 			jbtnNewGame = new JButton("New Game");
 			jbtnNewGame.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-				GUIKontrolor.prikaziGlavniProzor();				
-				}
+						if(GUIKontrolor.indexTrenutnogIgraca == -1) GUIKontrolor.upozoriDaNijeIzabranIgrac();
+						else GUIKontrolor.prikaziGlavniProzor();	
+					}
 			});
 			jbtnNewGame.setPreferredSize(new Dimension(130, 30));
 		}

@@ -85,6 +85,7 @@ public class GUIKontrolor {
 		String recZaPrikaz = "";
 
 		if (kategorija.equalsIgnoreCase("movies")) {
+			
 			trazenaRec = k.getFilmovi()[randomBroj];
 		}
 		if (kategorija.equalsIgnoreCase("classical books")) {

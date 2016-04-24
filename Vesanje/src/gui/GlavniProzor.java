@@ -53,6 +53,7 @@ public class GlavniProzor extends JFrame {
 	private JButton btnTry;
 	private JPanel panelZaSliku;
 	private JLabel jlblSlika;
+	private JButton btnGiveUp;
 	
 
 	public GlavniProzor() {
@@ -100,6 +101,7 @@ public class GlavniProzor extends JFrame {
 			panelZaDugmice.add(getBtnTry());
 			panelZaDugmice.add(getLabel_2());
 			panelZaDugmice.add(getBtnExitGame());
+			panelZaDugmice.add(getBtnGiveUp());
 		}
 		return panelZaDugmice;
 	}
@@ -265,6 +267,11 @@ public class GlavniProzor extends JFrame {
 	private JButton getBtnExitGame() {
 		if (btnExitGame == null) {
 			btnExitGame = new JButton("Exit game");
+			btnExitGame.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontrolor.ugasiAplikaciju();
+				}
+			});
 			btnExitGame.setPreferredSize(new Dimension(100, 25));
 		}
 		return btnExitGame;
@@ -352,5 +359,17 @@ public class GlavniProzor extends JFrame {
 			}
 			return panelZaSliku;
 		}
+	private JButton getBtnGiveUp() {
+		if (btnGiveUp == null) {
+			btnGiveUp = new JButton("Give up!");
+			btnGiveUp.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			btnGiveUp.setPreferredSize(new Dimension(100, 25));
+		}
+		return btnGiveUp;
+	}
 	}
 
