@@ -1,61 +1,78 @@
 package gui;
 
-import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import baza.TabelaZaScore;
 import gui.kontrolor.GUIKontrolor;
 
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.FlowLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.Component;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Score extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JLabel jlblPlayer;
+	private JPanel panel;
+	private JLabel lblPlayer;
 	private JLabel jlblImeIgraca;
+	private JPanel panel_1;
+	private JButton btnOk;
+	private JScrollPane scrollPane;
 	private JTable jtblScore;
-	private JButton jbtnOk;
+
+	/**
+	 * Launch the application.
+	 */
 
 
 	/**
 	 * Create the frame.
 	 */
 	public Score() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Score.class.getResource("/resursi/ghosticon.png")));
 		setTitle("Score");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Score.class.getResource("/resursi/ghosticon.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 576, 175);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		contentPane.add(getJlblPlayer());
-		contentPane.add(getJlblImeIgraca());
-		contentPane.add(getJtblScore());
-		contentPane.add(getJbtnOk());
+		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.add(getPanel(), BorderLayout.NORTH);
+		contentPane.add(getPanel_1(), BorderLayout.SOUTH);
+		contentPane.add(getScrollPane(), BorderLayout.CENTER);
 	}
-	private JLabel getJlblPlayer() {
-		if (jlblPlayer == null) {
-			jlblPlayer = new JLabel("Player:");
-			jlblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			jlblPlayer.setBounds(44, 18, 65, 23);
+
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setPreferredSize(new Dimension(10, 40));
+			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			panel.add(getLblPlayer());
+			panel.add(getJlblImeIgraca());
 		}
-		return jlblPlayer;
+		return panel;
+	}
+	private JLabel getLblPlayer() {
+		if (lblPlayer == null) {
+			lblPlayer = new JLabel("Player:");
+			lblPlayer.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		}
+		return lblPlayer;
 	}
 	private JLabel getJlblImeIgraca() {
 		if (jlblImeIgraca == null) {
@@ -66,25 +83,43 @@ public class Score extends JFrame {
 		}
 		return jlblImeIgraca;
 	}
-	private JTable getJtblScore() {
-		if (jtblScore == null) {
-			jtblScore = new JTable(new TabelaZaScore(GUIKontrolor.igraci.vratiIgraca(GUIKontrolor.indexTrenutnogIgraca)));
-			jtblScore.setBounds(44, 169, 357, -105);
+	private JPanel getPanel_1() {
+		if (panel_1 == null) {
+			panel_1 = new JPanel();
+			panel_1.setPreferredSize(new Dimension(10, 40));
+			panel_1.add(getBtnOk());
 		}
-		return jtblScore;
+		return panel_1;
 	}
-	private JButton getJbtnOk() {
-		if (jbtnOk == null) {
-			jbtnOk = new JButton("OK");
-			jbtnOk.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+	private JButton getBtnOk() {
+		if (btnOk == null) {
+			btnOk = new JButton("OK");
+			btnOk.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
 					dispose();
 				}
 			});
-			jbtnOk.setPreferredSize(new Dimension(30, 30));
-			jbtnOk.setBounds(379, 231, 55, 30);
+			btnOk.setAlignmentX(Component.RIGHT_ALIGNMENT);
+			btnOk.setPreferredSize(new Dimension(47, 30));
 		}
-		return jbtnOk;
+		return btnOk;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setViewportView(getJtblScore());
+		}
+		return scrollPane;
+	}
+	private JTable getJtblScore() {
+		if (jtblScore == null) {
+			jtblScore = new JTable();
+			jtblScore.setRowHeight(30);
+			jtblScore.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			jtblScore.setFillsViewportHeight(true);
+			jtblScore.setModel(new TabelaZaScore(GUIKontrolor.vratiTrenutnogIgraca()));
+			
+		}
+		return jtblScore;
 	}
 }

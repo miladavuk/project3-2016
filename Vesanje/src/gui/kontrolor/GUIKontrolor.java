@@ -112,6 +112,10 @@ public class GUIKontrolor {
 	}
 
 	public static void prozorZaScore() {
+		if(indexTrenutnogIgraca == -1){
+			upozoriDaNijeIzabranIgrac();
+			return;
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -172,5 +176,13 @@ public static char[] dodajSlovo(char slovo, char[] recZaPrikazNiz) {
 		else brojPromasaja++;
 			
 		
+	}
+	
+	public static Igrac vratiTrenutnogIgraca(){
+		return igraci.vratiIgraca(indexTrenutnogIgraca);
+	}
+	
+	public static void upozoriDaNijeIzabranIgrac(){
+		JOptionPane.showMessageDialog(pocetniProzor.getContentPane(), "You haven't chosen a player!");
 	}
 }

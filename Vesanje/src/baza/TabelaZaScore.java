@@ -29,12 +29,13 @@ public class TabelaZaScore extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowCount, int columnCount) {
+		if(igrac == null) return "";
 		switch(columnCount){
 			case 0: return igrac.getBrendovi().size() + " / 20";
 			case 1: return igrac.getDrzave().size() + " / 20";
 			case 2: return igrac.getFilmovi().size() + " / 20";
 			case 3: return igrac.getKnjige().size() + " / 20";
-			case 4: return igrac.getIstorijskeLicnosti() + " / 20";
+			case 4: return igrac.getIstorijskeLicnosti().size() + " / 20";
 			case 5: return igrac.getPoznateLicnosti().size() + " / 20";
 			default: return "N/A";
 		}
