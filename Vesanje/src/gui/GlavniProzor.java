@@ -307,15 +307,23 @@ public class GlavniProzor extends JFrame {
 			btnTry = new JButton("Try!");
 			btnTry.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					igrica.probajCeluRec(textField.getText().toString().trim());
-					if(igrica.getBrojPromasaja()>0){
-						promeniSliku();	
-						igrica.povecajBrojPromasaja();
-					}
-					if(igrica.getBrojPromasaja()==6){
-						igrica.igracJeIzgubio();
+					if(igrica.probajCeluRec(textField.getText().toString().trim())){
+						igrica.igracJePobedio();
+						btnTry.setVisible(false);
+						setVisible(false);
 						dispose();
+					}else{
+						if(igrica.getBrojPromasaja()>0){
+							promeniSliku();	
+						}
+						if(igrica.getBrojPromasaja()==6){
+							igrica.igracJeIzgubio();
+							btnTry.setVisible(false);
+							setVisible(false);
+							dispose();
+						}
 					}
+				
 				}
 				
 			});
@@ -373,6 +381,8 @@ public class GlavniProzor extends JFrame {
 			btnGiveUp = new JButton("Give up!");
 			btnGiveUp.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					setVisible(false);
+					GUIKontrolor.pocetniProzor.setVisible(true);
 					dispose();
 				}
 			});
@@ -438,13 +448,17 @@ public class GlavniProzor extends JFrame {
 						promeniSliku();
 					}
 					if(igrica.getBrojPromasaja()==6){
+						btnOk.setVisible(false);
 						igrica.igracJeIzgubio();
+						setVisible(false);
 						dispose();
 					}
 					
 //Marina: Bio je ovde bag, recZaPrikazNiz kad se konvertuje u String daje adresu, a ne taj string
 					if(String.copyValueOf(recZaPrikazNiz).toUpperCase().equals(igrica.getTrazenaRec().toUpperCase())){
 						igrica.igracJePobedio();
+						btnOk.setVisible(false);
+						setVisible(false);
 						dispose();
 					}
 				}

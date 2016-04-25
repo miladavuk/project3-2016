@@ -12,6 +12,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.kontrolor.GUIKontrolor;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -63,10 +66,8 @@ public class Pobeda extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						PocetniProzor p = new PocetniProzor();
-						p.setVisible(true);
-						setVisible(false);
-
+						GUIKontrolor.pocetniProzor.setVisible(true);
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");

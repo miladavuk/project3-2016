@@ -135,9 +135,12 @@ public class Igrica {
 		
 	}
 	
-	public void probajCeluRec(String text) {	
-		if(text.equalsIgnoreCase(trazenaRec))igracJePobedio();
-		else brojPromasaja++;
+	public boolean probajCeluRec(String text) {	
+		if(text.equalsIgnoreCase(trazenaRec))return true;
+		else {
+			brojPromasaja++;
+			return false;
+		}
 	}
 	
 	public void igracJeIzgubio(){
