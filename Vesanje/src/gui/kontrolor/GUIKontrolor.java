@@ -70,15 +70,14 @@ public class GUIKontrolor {
 		try {
 			Poraz dialog = new Poraz();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);			
+			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public static void prozorZaScore() {
-		if(indexTrenutnogIgraca == -1){
+		if (indexTrenutnogIgraca == -1) {
 			upozoriDaNijeIzabranIgrac();
 			return;
 		}
@@ -93,7 +92,6 @@ public class GUIKontrolor {
 			}
 		});
 	}
-
 
 	public static void pozoviInstrukcije() {
 		EventQueue.invokeLater(new Runnable() {
@@ -110,27 +108,34 @@ public class GUIKontrolor {
 	}
 
 	public static void ugasiAplikaciju() {
-		//Milada:promenjeno na engleski jer pravimo aplikaciju na engleskom! :)
-		//Marina: Yeah, I forgot. xD
-		int opcija = JOptionPane.showConfirmDialog(pocetniProzor.getContentPane(),
-				"Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
+		// Milada:promenjeno na engleski jer pravimo aplikaciju na engleskom! :)
+		// Marina: Yeah, I forgot. xD
+		int opcija = JOptionPane.showConfirmDialog(pocetniProzor.getContentPane(), "Are you sure you want to exit?",
+				"Exit", JOptionPane.YES_NO_OPTION);
 
 		if (opcija == JOptionPane.YES_OPTION) {
 			igraci.serijalizujIgrace();
 			System.exit(0);
 		}
+		// By Luka:
+		// if(opcija==JOptionPane.NO_OPTION){
+		// igraci.serijalizujIgrace();
+		// sad ne znam kako se gasi ovaj optionPane, mislio sam da se ugasi, a
+		// ne da se otvara novi glavni prozor :D
+		// }
+
 	}
-	
-	public static Igrac vratiTrenutnogIgraca(){
+
+	public static Igrac vratiTrenutnogIgraca() {
 		return igraci.vratiIgraca(indexTrenutnogIgraca);
 	}
-	
-	public static void upozoriDaNijeIzabranIgrac(){
+
+	public static void upozoriDaNijeIzabranIgrac() {
 		JOptionPane.showMessageDialog(pocetniProzor.getContentPane(), "You haven't chosen a player!");
 	}
-	
-	public static boolean incijalizujIgraca(String ime){
-		if(!igraci.daLiPostoji(ime)) {
+
+	public static boolean incijalizujIgraca(String ime) {
+		if (!igraci.daLiPostoji(ime)) {
 			igraci.dodajIgraca(ime);
 			indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
 			return true;
@@ -138,5 +143,5 @@ public class GUIKontrolor {
 		indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
 		return false;
 	}
-	
+
 }
