@@ -306,6 +306,7 @@ public class GlavniProzor extends JFrame {
 			btnTry = new JButton("Try!");
 			btnTry.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					comboBoxKategorije.setEnabled(false);
 					igrica.probajCeluRec(textField.getText().toString().trim());
 					if(igrica.getBrojPromasaja()>0){
 						promeniSliku();	
@@ -418,6 +419,7 @@ public class GlavniProzor extends JFrame {
 			btnOk.setPreferredSize(new Dimension(70, 25));
 			btnOk.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					comboBoxKategorije.setEnabled(false);
 					String slovoString = comboBoxSlova.getSelectedItem().toString().trim();	
 					char slovo = slovoString.charAt(0);
 					int index = comboBoxSlova.getSelectedIndex();
