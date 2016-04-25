@@ -59,8 +59,8 @@ public class Intructions extends JFrame {
 			textArea = new JTextArea();
 			textArea.setEditable(false);
 			textArea.setText("You have 6 categories: MOVIES, COUNTRIES, HYSTORICAL \nPEOPLE, "
-					+ "FAMOUS PEOPLE, BRANDS and BOOKS. Every \ncategory has 20 words.Words will go an random.\nYour score of"
-					+ "guessed words is being kept.\nYour task is to guess all of the 120 words.\nFor every word, "
+					+ "FAMOUS PEOPLE, BRANDS and BOOKS. Every \ncategory has 20 words. Words will go on random.\nYour score of"
+					+ " guessed words is being kept.\nYour task is to guess all of the 120 words.\nFor every word, "
 					+ "you can choose\nthe wrong letter 6 times. GOOD LUCK!");
 			
 		}
