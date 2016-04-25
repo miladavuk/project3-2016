@@ -37,7 +37,7 @@ public class GlavniProzor extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panelZaRec;
-	private JPanel panelZaDugmice;
+	private JPanel panelZaDugmice;	
 	private JLabel lblKategorija;
 	private JComboBox comboBoxKategorije;
 	private JLabel lblIzaberiSlovo;
@@ -72,7 +72,7 @@ public class GlavniProzor extends JFrame {
 
 	public GlavniProzor() throws IOException {
 		igrica = new Igrica(GUIKontrolor.vratiTrenutnogIgraca());
-		// GUIKontrolor.brojPromasaja=0;
+		//GUIKontrolor.brojPromasaja=0;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GlavniProzor.class.getResource("/resursi/ghosticon.png")));
 		setResizable(false);
 		setPreferredSize(new Dimension(1000, 2000));
@@ -89,7 +89,7 @@ public class GlavniProzor extends JFrame {
 		contentPane.add(getJpnlIgrac(), BorderLayout.NORTH);
 		image1 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala1.jpg"));
 		image2 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala2.jpg"));
-		image3 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala3.jpg"));
+		image3 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala3.jpg"));	
 		image4 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala4.jpg"));
 		image5 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala5.jpg"));
 		image6 = new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala6.jpg"));
@@ -129,6 +129,7 @@ public class GlavniProzor extends JFrame {
 		return panelZaDugmice;
 	}
 
+
 	private JTable getTable() {
 		if (table == null) {
 			table = new JTable();
@@ -158,20 +159,19 @@ public class GlavniProzor extends JFrame {
 			comboBoxKategorije = new JComboBox();
 			comboBoxKategorije.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					// GUIKontrolor.brojPromasaja=0;
-
-					String kategorija = comboBoxKategorije.getSelectedItem().toString();
+					//GUIKontrolor.brojPromasaja=0;
 					
+					String kategorija = comboBoxKategorije.getSelectedItem().toString();
 					String recZaPrikaz = igrica.vratiString(kategorija);
-					if (recZaPrikaz.equals("greska"))
-						JOptionPane.showMessageDialog(getContentPane(),
-								"You have guessed all from that category, please choose the other one!");
-					else {
+					if(recZaPrikaz.equals("greska")) JOptionPane.showMessageDialog(getContentPane(), "You have guessed all from that category, please choose the other one!");
+					else{
 						recZaPrikazNiz = recZaPrikaz.toCharArray();
 						table.setModel(new TabelaZaRec(recZaPrikaz.toCharArray()));
 						table.setTableHeader(null);
 					}
-
+					
+					
+					//comboBoxKategorije.setEditable(false);
 				}
 			});
 			comboBoxKategorije.setPreferredSize(new Dimension(100, 25));
@@ -307,67 +307,66 @@ public class GlavniProzor extends JFrame {
 			btnTry.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					igrica.probajCeluRec(textField.getText().toString().trim());
-					if (igrica.getBrojPromasaja() > 0) {
-						promeniSliku();
+					if(igrica.getBrojPromasaja()>0){
+						promeniSliku();	
 						igrica.povecajBrojPromasaja();
 					}
-					if (igrica.getBrojPromasaja() == 6) {
+					if(igrica.getBrojPromasaja()==6){
 						igrica.igracJeIzgubio();
 						dispose();
 					}
 				}
-
+				
 			});
 			btnTry.setPreferredSize(new Dimension(100, 25));
 		}
 		return btnTry;
 	}
-
-	private JLabel getJlblSlika1() {
+	
+	
+		private JLabel getJlblSlika1() {
 		if (jlblSlika1 == null) {
-			jlblSlika1 = new JLabel("");
+			jlblSlika1 = new JLabel("");			
 			jlblSlika1.setIcon(new ImageIcon(GlavniProzor.class.getResource("/resursi/vesala1.jpg")));
-
+			
 		}
 		return jlblSlika1;
 	}
-
-	private void promeniSliku() {
-
-		switch (igrica.getBrojPromasaja()) {
-
-		case 0:
-			jlblSlika1.setIcon(image1);
-			break;
-		case 1:
-			jlblSlika1.setIcon(image2);
-			break;
-		case 2:
-			jlblSlika1.setIcon(image3);
-			break;
-		case 3:
-			jlblSlika1.setIcon(image4);
-			break;
-		case 4:
-			jlblSlika1.setIcon(image5);
-			break;
-		case 5:
-			jlblSlika1.setIcon(image6);
-			break;
-		case 6:
-			jlblSlika1.setIcon(image7);
-			break;
-		}
+	private void promeniSliku() {		
+			
+		switch(igrica.getBrojPromasaja()){
+			
+			case 0:
+				jlblSlika1.setIcon(image1);
+				break;					
+			case 1: 
+				jlblSlika1.setIcon(image2);
+				break;
+			case 2:
+				jlblSlika1.setIcon(image3);
+				break;     
+			case 3:
+				jlblSlika1.setIcon(image4);
+				break;
+			case 4: 
+				jlblSlika1.setIcon(image5);
+				break;		
+			case 5: 
+				jlblSlika1.setIcon(image6);
+				break;
+			case 6: 
+				jlblSlika1.setIcon(image7);
+				break; 
+		}						
 	}
 
-	private JPanel getPanelZaSliku() {
-		if (panelZaSliku == null) {
-			panelZaSliku = new JPanel();
-			panelZaSliku.add(getJlblSlika1());
+		private JPanel getPanelZaSliku() {
+			if (panelZaSliku == null) {
+				panelZaSliku = new JPanel();
+				panelZaSliku.add(getJlblSlika1());
+			}
+			return panelZaSliku;
 		}
-		return panelZaSliku;
-	}
-
 	private JButton getBtnGiveUp() {
 		if (btnGiveUp == null) {
 			btnGiveUp = new JButton("Give up!");
@@ -380,7 +379,6 @@ public class GlavniProzor extends JFrame {
 		}
 		return btnGiveUp;
 	}
-
 	private JPanel getJpnlIgrac() {
 		if (jpnlIgrac == null) {
 			jpnlIgrac = new JPanel();
@@ -391,7 +389,6 @@ public class GlavniProzor extends JFrame {
 		}
 		return jpnlIgrac;
 	}
-
 	private JLabel getJlblPlayer() {
 		if (jlblPlayer == null) {
 			jlblPlayer = new JLabel("Player:");
@@ -399,7 +396,6 @@ public class GlavniProzor extends JFrame {
 		}
 		return jlblPlayer;
 	}
-
 	private JLabel getJlblImeIgraca() {
 		if (jlblImeIgraca == null) {
 			jlblImeIgraca = new JLabel(igrica.getIgrac().getIme());
@@ -408,7 +404,6 @@ public class GlavniProzor extends JFrame {
 		}
 		return jlblImeIgraca;
 	}
-
 	private JLabel getJlblSlika7() {
 		if (jlblSlika7 == null) {
 			jlblSlika7 = new JLabel("New label");
@@ -417,41 +412,36 @@ public class GlavniProzor extends JFrame {
 		}
 		return jlblSlika7;
 	}
-
 	private JButton getBtnOk() {
 		if (btnOk == null) {
 			btnOk = new JButton("OK");
 			btnOk.setPreferredSize(new Dimension(70, 25));
 			btnOk.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					comboBoxKategorije.setEnabled(false);
-					String slovoString = comboBoxSlova.getSelectedItem().toString().trim();
+					String slovoString = comboBoxSlova.getSelectedItem().toString().trim();	
 					char slovo = slovoString.charAt(0);
 					int index = comboBoxSlova.getSelectedIndex();
-					// Marina: Dodala sam da izbacuje iz comboboxa koriscena
-					// slova
-					comboBoxSlova.removeItemAt(index);
-					;
+					//Marina: Dodala sam da izbacuje iz comboboxa koriscena slova 
+					comboBoxSlova.removeItemAt(index);;
 					comboBoxSlova.revalidate();
-					// Milada: ako slovo postoji u reci, dodaj u GLOBALNU
-					// promenljivu
-					if (igrica.getTrazenaRec().toUpperCase().indexOf(slovo) != -1) {
-						recZaPrikazNiz = igrica.dodajSlovo(slovo, recZaPrikazNiz);
+					//Milada: ako slovo postoji u reci, dodaj u GLOBALNU promenljivu	
+					if(igrica.getTrazenaRec().toUpperCase().indexOf(slovo)!=-1){
+						recZaPrikazNiz=igrica.dodajSlovo(slovo,recZaPrikazNiz);
 						table.setModel(new TabelaZaRec(recZaPrikazNiz));
-						table.setTableHeader(null);
-
-					} else {
+						table.setTableHeader(null);	
+						
+						
+					}else{ 
 						igrica.povecajBrojPromasaja();
 						promeniSliku();
 					}
-					if (igrica.getBrojPromasaja() == 6) {
+					if(igrica.getBrojPromasaja()==6){
 						igrica.igracJeIzgubio();
 						dispose();
 					}
-
-					// Marina: Bio je ovde bag, recZaPrikazNiz kad se konvertuje
-					// u String daje adresu, a ne taj string
-					if (String.copyValueOf(recZaPrikazNiz).toUpperCase().equals(igrica.getTrazenaRec().toUpperCase())) {
+					
+//Marina: Bio je ovde bag, recZaPrikazNiz kad se konvertuje u String daje adresu, a ne taj string
+					if(String.copyValueOf(recZaPrikazNiz).toUpperCase().equals(igrica.getTrazenaRec().toUpperCase())){
 						igrica.igracJePobedio();
 						dispose();
 					}
@@ -460,4 +450,5 @@ public class GlavniProzor extends JFrame {
 		}
 		return btnOk;
 	}
-}
+	}
+
