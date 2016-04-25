@@ -287,7 +287,7 @@ public class GlavniProzor extends JFrame {
 	private JLabel getLabel_2() {
 		if (lblPrazanProstor4 == null) {
 			lblPrazanProstor4 = new JLabel("");
-			lblPrazanProstor4.setPreferredSize(new Dimension(170, 130));
+			lblPrazanProstor4.setPreferredSize(new Dimension(170, 100));
 		}
 		return lblPrazanProstor4;
 	}
