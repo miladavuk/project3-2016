@@ -160,6 +160,9 @@ public class GlavniProzor extends JFrame {
 			comboBoxKategorije.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					//GUIKontrolor.brojPromasaja=0;
+					if(comboBoxSlova!=null && comboBoxSlova.getItemCount()<26)
+						JOptionPane.showMessageDialog(getContentPane(), "Please give up before selecting a new category!");
+
 					
 					String kategorija = comboBoxKategorije.getSelectedItem().toString();
 					String recZaPrikaz = igrica.vratiString(kategorija);
@@ -173,6 +176,8 @@ public class GlavniProzor extends JFrame {
 					
 					//comboBoxKategorije.setEditable(false);
 				}
+
+				
 			});
 			comboBoxKategorije.setPreferredSize(new Dimension(100, 25));
 			comboBoxKategorije.addItem("Movies");
