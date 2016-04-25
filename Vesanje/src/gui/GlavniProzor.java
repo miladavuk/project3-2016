@@ -160,10 +160,6 @@ public class GlavniProzor extends JFrame {
 			comboBoxKategorije.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					//GUIKontrolor.brojPromasaja=0;
-					if(comboBoxSlova!=null && comboBoxSlova.getItemCount()<26)
-						JOptionPane.showMessageDialog(getContentPane(), "Please give up before selecting a new category!");
-
-					
 					String kategorija = comboBoxKategorije.getSelectedItem().toString();
 					String recZaPrikaz = igrica.vratiString(kategorija);
 					if(recZaPrikaz.equals("greska")) JOptionPane.showMessageDialog(getContentPane(), "You have guessed all from that category, please choose the other one!");
@@ -423,6 +419,7 @@ public class GlavniProzor extends JFrame {
 			btnOk.setPreferredSize(new Dimension(70, 25));
 			btnOk.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					comboBoxKategorije.setEnabled(false);
 					String slovoString = comboBoxSlova.getSelectedItem().toString().trim();	
 					char slovo = slovoString.charAt(0);
 					int index = comboBoxSlova.getSelectedIndex();
