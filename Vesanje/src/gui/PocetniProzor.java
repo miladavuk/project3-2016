@@ -112,12 +112,12 @@ public class PocetniProzor extends JFrame {
 	private JButton getJbtnExit() {
 		if (jbtnExit == null) {
 			jbtnExit = new JButton("Exit");
-			jbtnExit.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+			jbtnExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
 					GUIKontrolor.ugasiAplikaciju();
 				}
 			});
+			
 			jbtnExit.setPreferredSize(new Dimension(130, 30));
 		}
 		return jbtnExit;
