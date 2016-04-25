@@ -15,12 +15,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Pobeda extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
 	public Pobeda() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Pobeda.class.getResource("/resursi/ghosticon.png")));
 		setBounds(100, 100, 600, 450);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

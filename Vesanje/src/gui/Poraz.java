@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class Poraz extends JDialog {
 
@@ -22,6 +23,7 @@ public class Poraz extends JDialog {
 
 
 	public Poraz() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Poraz.class.getResource("/resursi/ghosticon.png")));
 		setBounds(100, 100, 350, 550);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
