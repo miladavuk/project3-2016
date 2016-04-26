@@ -17,6 +17,8 @@ import gui.kontrolor.GUIKontrolor;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -26,6 +28,15 @@ public class Poraz extends JDialog {
 
 
 	public Poraz() {
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				GUIKontrolor.pocetniProzor.setVisible(true);
+				dispose();
+			}
+
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Poraz.class.getResource("/resursi/ghosticon.png")));
 		setBounds(100, 100, 350, 550);
 		getContentPane().setLayout(new BorderLayout());
