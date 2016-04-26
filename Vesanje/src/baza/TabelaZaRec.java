@@ -32,18 +32,38 @@ public class TabelaZaRec extends AbstractTableModel {
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.TableModel#getColumnCount() Metoda vraca broj
+	 * kolona, koji je jednak velicini niza u kom se cuva rec koja treba da se
+	 * pogodi.
+	 */
 	public int getColumnCount() {
 
 		return recZaPrikazNiz.length;
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.TableModel#getRowCount() Metoda vraca broj redova,
+	 * u tom slucaju to je 1.
+	 */
 	public int getRowCount() {
 
 		return 1;
 	}
 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.TableModel#getValueAt(int, int) Metoda vraca
+	 * vrednost vrednost elemnta niza na poziciji u odredjenoj koloni, koja je
+	 * prosledjena kao parametar.
+	 */
 	public Object getValueAt(int rowIndex, int columnIndex) {
 
 		return recZaPrikazNiz[columnIndex];
