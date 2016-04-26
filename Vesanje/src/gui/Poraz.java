@@ -12,8 +12,13 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.kontrolor.GUIKontrolor;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -23,6 +28,15 @@ public class Poraz extends JDialog {
 
 
 	public Poraz() {
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				GUIKontrolor.pocetniProzor.setVisible(true);
+				dispose();
+			}
+
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Poraz.class.getResource("/resursi/ghosticon.png")));
 		setBounds(100, 100, 350, 550);
 		getContentPane().setLayout(new BorderLayout());
@@ -60,9 +74,8 @@ public class Poraz extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						PocetniProzor p = new PocetniProzor();
-						p.setVisible(true);
-						setVisible(false);
+						GUIKontrolor.pocetniProzor.setVisible(true);
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");

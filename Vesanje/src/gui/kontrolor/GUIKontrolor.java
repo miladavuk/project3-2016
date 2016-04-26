@@ -113,6 +113,7 @@ public class GUIKontrolor {
 		int opcija = JOptionPane.showConfirmDialog(pocetniProzor.getContentPane(), "Are you sure you want to exit?",
 				"Exit", JOptionPane.YES_NO_OPTION);
 
+		if(opcija == JOptionPane.NO_OPTION)return;
 		if (opcija == JOptionPane.YES_OPTION) {
 			igraci.serijalizujIgrace();
 			System.exit(0);

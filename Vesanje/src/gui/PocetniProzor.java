@@ -62,7 +62,7 @@ public class PocetniProzor extends JFrame {
 		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PocetniProzor.class.getResource("/resursi/ghosticon.png")));
 		setTitle("Hangman");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,7 +89,11 @@ public class PocetniProzor extends JFrame {
 			jbtnNewGame.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 						if(GUIKontrolor.indexTrenutnogIgraca == -1) GUIKontrolor.upozoriDaNijeIzabranIgrac();
-						else GUIKontrolor.prikaziGlavniProzor();	
+						else {
+							GUIKontrolor.prikaziGlavniProzor();
+							GUIKontrolor.pocetniProzor.setVisible(false);
+						}
+						
 					}
 			});
 			jbtnNewGame.setPreferredSize(new Dimension(130, 30));
