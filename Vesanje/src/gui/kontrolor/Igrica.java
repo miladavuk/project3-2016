@@ -83,7 +83,7 @@ public class Igrica {
 				indexReci = randomBroj;
 			}
 		}
-		if (kategorija.equalsIgnoreCase("hystoric people")) {
+		if (kategorija.equalsIgnoreCase("historic people")) {
 			if(igrac.getIstorijskeLicnosti().size() >= 20) return "greska";
 			if(igrac.getIstorijskeLicnosti().contains(randomBroj)) trazenaRec = vratiString(kategorija);
 			else{
