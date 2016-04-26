@@ -48,7 +48,7 @@ public class TabelaZaScore extends AbstractTableModel {
 		case 1: return "Countries";
 		case 2: return "Movies";
 		case 3: return "Books";
-		case 4: return "Hystorical people";
+		case 4: return "Historical people";
 		case 5: return "Famous people";
 		default: return "N/A";
 		}

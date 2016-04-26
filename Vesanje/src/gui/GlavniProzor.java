@@ -188,7 +188,7 @@ public class GlavniProzor extends JFrame {
 			comboBoxKategorije.addItem("Movies");
 			comboBoxKategorije.addItem("Countries");
 			comboBoxKategorije.addItem("Classical books");
-			comboBoxKategorije.addItem("Historic people");
+			comboBoxKategorije.addItem("Historical people");
 			comboBoxKategorije.addItem("Famous people");
 			comboBoxKategorije.addItem("Famous brands");
 		}

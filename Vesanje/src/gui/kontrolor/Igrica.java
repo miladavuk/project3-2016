@@ -83,7 +83,7 @@ public class Igrica {
 				indexReci = randomBroj;
 			}
 		}
-		if (kategorija.equalsIgnoreCase("historic people")) {
+		if (kategorija.equalsIgnoreCase("historical people")) {
 			if(igrac.getIstorijskeLicnosti().size() >= 20) return "greska";
 			if(igrac.getIstorijskeLicnosti().contains(randomBroj)) trazenaRec = vratiString(kategorija);
 			else{
@@ -158,7 +158,7 @@ public class Igrica {
 			case "Classical books":
 				igrac.ubaciKnjigu(indexReci);
 				break;
-			case "Hystoric people":
+			case "Historical people":
 				igrac.ubaciIstorijskuLicnost(indexReci);
 				break;
 			case "Famous people":
