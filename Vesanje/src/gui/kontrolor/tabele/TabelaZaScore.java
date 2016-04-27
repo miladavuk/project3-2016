@@ -1,10 +1,12 @@
-package baza;
+package gui.kontrolor.tabele;
 
 import javax.swing.table.AbstractTableModel;
 /*
  *		Klasa predstavlja tabelu u kojoj ce biti prikazan broj pogodjenih pojmova, 
  *		po svakoj kategoriji, za odredjenog igraca. 
  */
+
+import baza.Igrac;
 
 public class TabelaZaScore extends AbstractTableModel {
 	/*

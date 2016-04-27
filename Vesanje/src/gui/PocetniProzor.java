@@ -38,10 +38,10 @@ public class PocetniProzor extends JFrame {
 	private JButton jbtnInstructions;
 	private JButton jbtnExit;
 	private JPanel jpnlPlayerButtons;
-	private JLabel lblPlayer;
+	private JLabel jlblPlayer;
 	private JTextField jtxtPlayer;
-	private JButton btnOk;
-	private JButton btnSeeYourScore;
+	private JButton jbtnOk;
+	private JButton jbtnSeeYourScore;
 	private JPanel jpnlSlika;
 	private JLabel jlblError;
 
@@ -54,6 +54,7 @@ public class PocetniProzor extends JFrame {
 	 * Create the frame.
 	 */
 	public PocetniProzor() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				GUIKontrolor.ugasiAplikaciju();
@@ -88,12 +89,7 @@ public class PocetniProzor extends JFrame {
 			jbtnNewGame = new JButton("New Game");
 			jbtnNewGame.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-						if(GUIKontrolor.indexTrenutnogIgraca == -1) GUIKontrolor.upozoriDaNijeIzabranIgrac();
-						else {
-							GUIKontrolor.prikaziGlavniProzor();
-							GUIKontrolor.pocetniProzor.setVisible(false);
-						}
-						
+						GUIKontrolor.zapocniIgru();
 					}
 			});
 			jbtnNewGame.setPreferredSize(new Dimension(130, 30));
@@ -139,13 +135,13 @@ public class PocetniProzor extends JFrame {
 		return jpnlPlayerButtons;
 	}
 	private JLabel getLblPlayer() {
-		if (lblPlayer == null) {
-			lblPlayer = new JLabel("Player:");
-			lblPlayer.setPreferredSize(new Dimension(34, 30));
-			lblPlayer.setForeground(Color.BLUE);
-			lblPlayer.setFont(new Font("Tahoma", Font.BOLD, 16));
+		if (jlblPlayer == null) {
+			jlblPlayer = new JLabel("Player:");
+			jlblPlayer.setPreferredSize(new Dimension(34, 30));
+			jlblPlayer.setForeground(Color.BLUE);
+			jlblPlayer.setFont(new Font("Tahoma", Font.BOLD, 16));
 		}
-		return lblPlayer;
+		return jlblPlayer;
 	}
 	private JTextField getJtxtPlayer() {
 		if (jtxtPlayer == null) {
@@ -157,9 +153,9 @@ public class PocetniProzor extends JFrame {
 		return jtxtPlayer;
 	}
 	private JButton getBtnOk() {
-		if (btnOk == null) {
-			btnOk = new JButton("OK");
-			btnOk.addActionListener(new ActionListener() {
+		if (jbtnOk == null) {
+			jbtnOk = new JButton("OK");
+			jbtnOk.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String igrac = jtxtPlayer.getText();
 					if(igrac.isEmpty())jlblError.setText("You didn't enter any name!");
@@ -167,24 +163,24 @@ public class PocetniProzor extends JFrame {
 					else jlblError.setText("Welcome back " + igrac + "!");
 				}
 			});
-			btnOk.setPreferredSize(new Dimension(50, 30));
+			jbtnOk.setPreferredSize(new Dimension(50, 30));
 		}
-		return btnOk;
+		return jbtnOk;
 	}
 	private JButton getBtnSeeYourScore() {
-		if (btnSeeYourScore == null) {
-			btnSeeYourScore = new JButton("See your score!");
-			btnSeeYourScore.addActionListener(new ActionListener() {
+		if (jbtnSeeYourScore == null) {
+			jbtnSeeYourScore = new JButton("See your score!");
+			jbtnSeeYourScore.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					if(GUIKontrolor.indexTrenutnogIgraca == -1) jlblError.setText("You haven't chosen your player!");
+					if(GUIKontrolor.vratiTrenutnogIgraca() == null) jlblError.setText("You haven't chosen your player!");
 					else GUIKontrolor.prozorZaScore();
 				}
 			});
-			btnSeeYourScore.setForeground(Color.BLUE);
-			btnSeeYourScore.setPreferredSize(new Dimension(109, 30));
-			btnSeeYourScore.setFont(new Font("Tahoma", Font.BOLD, 16));
+			jbtnSeeYourScore.setForeground(Color.BLUE);
+			jbtnSeeYourScore.setPreferredSize(new Dimension(109, 30));
+			jbtnSeeYourScore.setFont(new Font("Tahoma", Font.BOLD, 16));
 		}
-		return btnSeeYourScore;
+		return jbtnSeeYourScore;
 	}
 	private JPanel getJpnlSlika() {
 		if (jpnlSlika == null) {

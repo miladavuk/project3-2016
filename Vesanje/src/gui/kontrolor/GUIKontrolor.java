@@ -1,21 +1,19 @@
 package gui.kontrolor;
 
 import java.awt.EventQueue;
-import java.util.LinkedList;
-import java.util.Random;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import baza.Hangman;
 import baza.Igrac;
-import baza.Igraci;
-import baza.Kategorije;
 import gui.GlavniProzor;
 import gui.Intructions;
 import gui.Pobeda;
 import gui.PocetniProzor;
 import gui.Poraz;
+import gui.PresaoIgricu;
 import gui.Score;
 
 /*
@@ -27,35 +25,12 @@ import gui.Score;
  *  trazenog pojma i cuvanje pdoataka o igracu i njegovom ucinku.
  */
 public class GUIKontrolor {
-	/*
-	 * Atribut predstavlja rec za kojom igrac trazi.
-	 */
-	public static String trazenaRec = "";
-	/*
-	 * Atribut pokazuje koliko puta je igrac promasio u odabiru slova ili
-	 * pokusaju pogadjanja cele reci. Pocetna vrednost je 0.
-	 */
-	public static int brojPromasaja = 0;
-	/*
-	 * Lista u kojoj se cuvaju slova koje je igrac iskoristio vec.
-	 */
-	public static LinkedList<Character> koriscenaSlova = new LinkedList<>();
-	/*
-	 * Atribut koji predstavlja broj slova koji je igrac iskoristio.
-	 */
-	public static int brojKoriscenihSlova = 0;
-	/*
-	 * Atribut koji predstavlja pocetni prozor igrice.
-	 */
+	public static GlavniProzor glavniProzor;
 	public static PocetniProzor pocetniProzor;
 	/*
 	 * Lista u kojoj se nalaze igraci.
 	 */
-	public static Igraci igraci;
-	/*
-	 * Atribut koji predstavlja indeks igraca koji trenutno pogadja.
-	 */
-	public static int indexTrenutnogIgraca;
+	public static Hangman hangman;
 
 	/*
 	 * Metoda inicijaluzuje atribut igraca i postavlja trenutni indeks igraca na
@@ -66,8 +41,7 @@ public class GUIKontrolor {
 	 * prozor.
 	 */
 	public static void main(String[] args) {
-		igraci = new Igraci();
-		indexTrenutnogIgraca = -1;
+		hangman = new Hangman();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -91,8 +65,8 @@ public class GUIKontrolor {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GlavniProzor frame = new GlavniProzor();
-					frame.setVisible(true);
+					glavniProzor = new GlavniProzor(hangman.vratiKategorije());
+					glavniProzor.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -139,7 +113,7 @@ public class GUIKontrolor {
 	 * @throws Exception Metoda baca izuzetak ako se prozor za Score ne otvori.
 	 */
 	public static void prozorZaScore() {
-		if (indexTrenutnogIgraca == -1) {
+		if (hangman.vratiIgraca() == null) {
 			upozoriDaNijeIzabranIgrac();
 			return;
 		}
@@ -192,7 +166,7 @@ public class GUIKontrolor {
 		if (opcija == JOptionPane.NO_OPTION)
 			return;
 		if (opcija == JOptionPane.YES_OPTION) {
-			igraci.serijalizujIgrace();
+			hangman.sacuvajIgrace();
 			System.exit(0);
 		}
 		// By Luka:
@@ -204,11 +178,24 @@ public class GUIKontrolor {
 
 	}
 
+	
+	public static void prikaziPresaoIgricu() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					PresaoIgricu frame = new PresaoIgricu();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	/*
 	 * @return Metoda vraca igraca koji trenutno igra.
 	 */
 	public static Igrac vratiTrenutnogIgraca() {
-		return igraci.vratiIgraca(indexTrenutnogIgraca);
+		return hangman.vratiIgraca();
 	}
 
 	/*
@@ -234,13 +221,59 @@ public class GUIKontrolor {
 	 * igraca se postavlja na tu vrednodt
 	 */
 	public static boolean incijalizujIgraca(String ime) {
-		if (!igraci.daLiPostoji(ime)) {
-			igraci.dodajIgraca(ime);
-			indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
-			return true;
-		}
-		indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
-		return false;
+		return hangman.incijalizujIgraca(ime);
 	}
 
+	public static void probajCeluRec() {
+		if(hangman.vratiIgraca().getIgrica().daLiJeIzgubio()){
+			igracJeIzgubio();
+		}
+		if(hangman.vratiIgraca().getIgrica().daLiJePogodioCeluRec()){
+			igracJePobedio();
+		}
+	}
+
+	private static void igracJeIzgubio() {
+		hangman.vratiIgraca().igracJeIzgubio();;
+		glavniProzor.dispose();
+		prikaziPoraz();
+	}
+
+	private static void igracJePobedio() {
+		hangman.vratiIgraca().igracJePobedio();
+		glavniProzor.dispose();
+		prikaziPobedu();
+	}
+
+	public static void odustani() {
+		glavniProzor.dispose();
+	}
+
+	public static char[] ubaciSlovo(char slovo, Boolean b) {
+		return hangman.vratiIgraca().getIgrica().dodajSlovo(slovo,b);
+	}
+
+	public static void zapocniIgru() {
+		if(vratiTrenutnogIgraca() != null) {
+			if(hangman.vratiKategorije().length == 0) prikaziPresaoIgricu();
+			else prikaziGlavniProzor();
+		}
+		else upozoriDaNijeIzabranIgrac();
+	}
+
+	public static char[] pokreniPartiju(String kategorija) {
+		return hangman.pokreniPartiju(kategorija);
+	}
+
+	public static int vratiBrojPromasaja() {
+		return hangman.vratiIgraca().getIgrica().getBrojPromasaja();
+	}
+	
+	public static void probajOdjednom(String text, Boolean b){
+		if(hangman.vratiIgraca().getIgrica().probajOdjednom(text)){
+			glavniProzor.dispose();
+			igracJePobedio();
+		}else b = true;
+	}
+	
 }

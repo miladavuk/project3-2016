@@ -24,10 +24,15 @@ import java.awt.Toolkit;
 
 public class Poraz extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 
 
 	public Poraz() {
+		setTitle("Hangman");
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override

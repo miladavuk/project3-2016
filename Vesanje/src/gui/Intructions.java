@@ -3,8 +3,11 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,14 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-
-import gui.kontrolor.GUIKontrolor;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.Toolkit;
 
 public class Intructions extends JFrame {
 
@@ -43,7 +38,7 @@ public class Intructions extends JFrame {
 	 */
 	public Intructions() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Intructions.class.getResource("/resursi/ghosticon.png")));
-		setTitle("Instructions");
+		setTitle("Hangman");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

@@ -2,31 +2,31 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import baza.TabelaZaScore;
-import gui.kontrolor.GUIKontrolor;
-
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
-import java.awt.Component;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
+import javax.swing.border.EmptyBorder;
+
+import gui.kontrolor.GUIKontrolor;
+import gui.kontrolor.tabele.TabelaZaScore;
 
 public class Score extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblPlayer;
@@ -78,7 +78,7 @@ public class Score extends JFrame {
 	}
 	private JLabel getJlblImeIgraca() {
 		if (jlblImeIgraca == null) {
-			jlblImeIgraca = new JLabel(GUIKontrolor.igraci.vratiIgraca(GUIKontrolor.indexTrenutnogIgraca).getIme());
+			jlblImeIgraca = new JLabel(GUIKontrolor.vratiTrenutnogIgraca().getIme());
 			jlblImeIgraca.setForeground(Color.RED);
 			jlblImeIgraca.setFont(new Font("Tahoma", Font.BOLD, 18));
 			jlblImeIgraca.setBounds(148, 13, 286, 30);

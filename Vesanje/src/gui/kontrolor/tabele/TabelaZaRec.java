@@ -1,4 +1,4 @@
-package baza;
+package gui.kontrolor.tabele;
 
 import javax.swing.table.AbstractTableModel;
 /*
@@ -6,6 +6,10 @@ import javax.swing.table.AbstractTableModel;
  */
 
 public class TabelaZaRec extends AbstractTableModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/*
 	 * Atribut oznacava niz karaktera koji predstavljaju pojam koji igrac treba
 	 * da pogodi.

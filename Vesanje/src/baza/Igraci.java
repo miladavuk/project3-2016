@@ -74,6 +74,7 @@ public class Igraci implements Serializable {
 	 * @throws Exception Metoda baca izuzetak u slucaju neuspesnog pokusaja
 	 * deserijalizacije podataka o igracima.
 	 */
+	@SuppressWarnings("unchecked")
 	public void deserijalizujIgrace() {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("Igraci.ser"))) {
 			igraci.addAll((LinkedList<Igrac>) in.readObject());
