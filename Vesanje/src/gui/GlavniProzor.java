@@ -426,7 +426,10 @@ public class GlavniProzor extends JFrame {
 					Boolean b = false;
 					table.setModel(new TabelaZaRec(GUIKontrolor.ubaciSlovo(slovo, b)));
 					GUIKontrolor.probajCeluRec();
-					if(b)promeniSliku();
+					if(b){
+						System.out.println("Promenicu sliku");
+						promeniSliku();
+					}
 				}
 			});
 		}

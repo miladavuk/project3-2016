@@ -228,7 +228,7 @@ public class GUIKontrolor {
 		if(hangman.vratiIgraca().getIgrica().daLiJeIzgubio()){
 			igracJeIzgubio();
 		}
-		if(hangman.vratiIgraca().getIgrica().daLiJePogodioCeluRec()){
+		if(hangman.vratiIgraca().getIgrica().daLiJePogodioCeluRec()){ //Ovde treba da se popavi
 			igracJePobedio();
 		}
 	}

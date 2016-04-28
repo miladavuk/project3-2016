@@ -50,7 +50,7 @@ public class Igrac implements Serializable {
 	public char [] pokreniIgricu(String kategorija) {
 		this.kategorija = kategorija;
 		igrica = new Igrica(vratiRec(kategorija));
-		return igrica.vratiNizChar();
+		return igrica.vratiRecZaPrikaz();
 
 	}
 

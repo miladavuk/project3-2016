@@ -30,7 +30,7 @@ public class Igrica {
 	public Igrica(String trazenaRec) {
 		this.trazenaRec = trazenaRec;
 		brojPromasaja = 0;
-		recZaPrikazNiz = vratiNizChar();
+		recZaPrikazNiz = vratiRecZaPrikaz();
 	}
 
 	/*
@@ -78,7 +78,7 @@ public class Igrica {
 	 * 
 	 */
 	
-	public char [] vratiNizChar() {
+	public char [] vratiRecZaPrikaz() {
 		String recZaPrikaz = "";
 	
 		for (int i = 0; i < trazenaRec.length(); i++) {
@@ -105,13 +105,13 @@ public class Igrica {
 	 * obliku niza.
 	 */
 	public char[] dodajSlovo(char slovo, Boolean b) {
-		String rec = trazenaRec.toUpperCase();
-		if (getTrazenaRec().toUpperCase().indexOf(slovo) != -1){
-			for (int i = 0; i < rec.length(); i++) {
-				if (rec.charAt(i) == slovo) {
+		if (trazenaRec.toUpperCase().indexOf(slovo) != -1){
+			for (int i = 0; i < trazenaRec.toUpperCase().length(); i++) {
+				if (trazenaRec.toUpperCase().charAt(i) == slovo) {
 					recZaPrikazNiz[i] = slovo;
 				}
 			}
+			b = false;
 		}else {
 			povecajBrojPromasaja();
 			b = true;
@@ -142,16 +142,14 @@ public class Igrica {
 	 * suprotnom vraca false.
 	 */
 	public boolean daLiJePogodioCeluRec() {
-		if (recZaPrikazNiz.toString().equalsIgnoreCase(trazenaRec))
-			return true;
-		else {
-			brojPromasaja++;
-			return false;
+		for (int i = 0; i < recZaPrikazNiz.length; i++) {
+			if(recZaPrikazNiz[i] == '*')return false;
 		}
+		return true;
 	}
 	
 	public boolean probajOdjednom(String text){
-		if (text.toString().equalsIgnoreCase(trazenaRec))return true;
+		if (text.equalsIgnoreCase(trazenaRec))return true;
 		else {
 			povecajBrojPromasaja();
 			return false;

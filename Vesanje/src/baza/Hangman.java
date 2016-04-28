@@ -11,7 +11,6 @@ public class Hangman {
 	public boolean incijalizujIgraca(String ime) {
 		if (!igraci.daLiPostoji(ime)) {
 			igraci.dodajIgraca(ime);
-			indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime); // MARINA: Ove verovatno treba da ide u hangmana
 			return true;
 		}
 		indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
