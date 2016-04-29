@@ -51,7 +51,6 @@ public class GlavniProzor extends JFrame {
 	private JButton btnExitGame;
 	private JLabel jlblPrazanProstor4;
 	private JTable table;
-	private char[] recZaPrikazNiz = "Default word".toCharArray();
 	private JScrollPane scrollPane;
 	private JButton btnTry;
 	private JPanel panelZaSliku;
@@ -146,7 +145,7 @@ public class GlavniProzor extends JFrame {
 			table.setFillsViewportHeight(true);
 			table.setShowHorizontalLines(false);
 			table.setRowSelectionAllowed(false);
-			table.setModel(new TabelaZaRec(recZaPrikazNiz));
+			table.setModel(new TabelaZaRec("Default word".toCharArray()));
 			table.setTableHeader(null);
 		}
 		return table;
@@ -206,33 +205,7 @@ public class GlavniProzor extends JFrame {
 		if (comboBoxSlova == null) {
 			comboBoxSlova = new JComboBox<Character>();
 			comboBoxSlova.setPreferredSize(new Dimension(40, 25));
-			comboBoxSlova.setModel(new DefaultComboBoxModel<>(Slova.getSlova()));
-//			comboBoxSlova.addItem('A');
-//			comboBoxSlova.addItem('B');
-//			comboBoxSlova.addItem('C');
-//			comboBoxSlova.addItem('D');
-//			comboBoxSlova.addItem('E');
-//			comboBoxSlova.addItem('F');
-//			comboBoxSlova.addItem('G');
-//			comboBoxSlova.addItem('H');
-//			comboBoxSlova.addItem('I');
-//			comboBoxSlova.addItem('J');
-//			comboBoxSlova.addItem('K');
-//			comboBoxSlova.addItem('L');
-//			comboBoxSlova.addItem('M');
-//			comboBoxSlova.addItem('N');
-//			comboBoxSlova.addItem('O');
-//			comboBoxSlova.addItem('P');
-//			comboBoxSlova.addItem('Q');
-//			comboBoxSlova.addItem('R');
-//			comboBoxSlova.addItem('S');
-//			comboBoxSlova.addItem('T');
-//			comboBoxSlova.addItem('U');
-//			comboBoxSlova.addItem('V');
-//			comboBoxSlova.addItem('W');
-//			comboBoxSlova.addItem('X');
-//			comboBoxSlova.addItem('Y');
-//			comboBoxSlova.addItem('Z');
+			comboBoxSlova.setModel(new DefaultComboBoxModel<>(Slova.getSlova()));	
 		}
 		return comboBoxSlova;
 	}
@@ -316,9 +289,7 @@ public class GlavniProzor extends JFrame {
 			btnTry.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					comboBoxKategorije.setEnabled(false);
-					Boolean b = false;
-					GUIKontrolor.probajOdjednom(textField.getText().toString().trim(),b);
-					if(b)promeniSliku();
+					if(!GUIKontrolor.probajOdjednom(textField.getText().toString().trim())) promeniSliku();
 				}	
 			});
 			btnTry.setPreferredSize(new Dimension(100, 25));
@@ -423,13 +394,11 @@ public class GlavniProzor extends JFrame {
 					char slovo = comboBoxSlova.getSelectedItem().toString().trim().charAt(0);
 					comboBoxSlova.removeItemAt(comboBoxSlova.getSelectedIndex());
 					comboBoxSlova.revalidate();
-					Boolean b = false;
-					table.setModel(new TabelaZaRec(GUIKontrolor.ubaciSlovo(slovo, b)));
-					GUIKontrolor.probajCeluRec();
-					if(b){
-						System.out.println("Promenicu sliku");
-						promeniSliku();
-					}
+					char [] recZaPrikazNiz;
+					if((recZaPrikazNiz = GUIKontrolor.ubaciSlovo(slovo)).length > 0){
+						table.setModel(new TabelaZaRec(recZaPrikazNiz));
+						GUIKontrolor.probajCeluRec();
+					}else promeniSliku();
 				}
 			});
 		}

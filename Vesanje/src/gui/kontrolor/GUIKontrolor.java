@@ -225,16 +225,16 @@ public class GUIKontrolor {
 	}
 
 	public static void probajCeluRec() {
-		if(hangman.vratiIgraca().getIgrica().daLiJeIzgubio()){
+		if(hangman.daLiJeIgracIzgubio()){
 			igracJeIzgubio();
 		}
-		if(hangman.vratiIgraca().getIgrica().daLiJePogodioCeluRec()){ //Ovde treba da se popavi
+		if(hangman.daLiJeIgracPogodioCeluRec()){
 			igracJePobedio();
 		}
 	}
 
 	private static void igracJeIzgubio() {
-		hangman.vratiIgraca().igracJeIzgubio();;
+		hangman.vratiIgraca().igracJeIzgubio();
 		glavniProzor.dispose();
 		prikaziPoraz();
 	}
@@ -246,11 +246,12 @@ public class GUIKontrolor {
 	}
 
 	public static void odustani() {
+		hangman.vratiIgraca().igracJeIzgubio();
 		glavniProzor.dispose();
 	}
 
-	public static char[] ubaciSlovo(char slovo, Boolean b) {
-		return hangman.vratiIgraca().getIgrica().dodajSlovo(slovo,b);
+	public static char[] ubaciSlovo(char slovo) {
+		return hangman.dodajSlovo(slovo);
 	}
 
 	public static void zapocniIgru() {
@@ -266,14 +267,16 @@ public class GUIKontrolor {
 	}
 
 	public static int vratiBrojPromasaja() {
-		return hangman.vratiIgraca().getIgrica().getBrojPromasaja();
+		return hangman.vratiBrojPromasaja();
 	}
 	
-	public static void probajOdjednom(String text, Boolean b){
+	public static boolean probajOdjednom(String text){
 		if(hangman.vratiIgraca().getIgrica().probajOdjednom(text)){
 			glavniProzor.dispose();
 			igracJePobedio();
-		}else b = true;
+			return true;
+		}else return false;
 	}
+	
 	
 }

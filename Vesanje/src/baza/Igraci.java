@@ -63,7 +63,6 @@ public class Igraci implements Serializable {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Igraci.ser"))) {
 			out.writeObject(igraci);
 		} catch (Exception e) {
-			System.out.println("Nije uspelo serijalizovanje!");
 		}
 
 	}

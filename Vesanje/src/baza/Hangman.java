@@ -32,4 +32,20 @@ public class Hangman {
 	public void sacuvajIgrace() {
 		igraci.serijalizujIgrace();
 	}
+	
+	public boolean daLiJeIgracIzgubio(){
+		return vratiIgraca().getIgrica().daLiJeIzgubio();
+	}
+	
+	public boolean daLiJeIgracPogodioCeluRec(){
+		return vratiIgraca().getIgrica().daLiJePogodioCeluRec();
+	}
+	
+	public char [] dodajSlovo(char slovo){
+		return vratiIgraca().getIgrica().dodajSlovo(slovo);
+	}
+	
+	public int vratiBrojPromasaja(){
+		return vratiIgraca().getIgrica().getBrojPromasaja();
+	}
 }

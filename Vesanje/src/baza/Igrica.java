@@ -104,19 +104,18 @@ public class Igrica {
 	 * nizu menja na to slovo i na kraju metoda vraca izmenjenu rec za prikaz u
 	 * obliku niza.
 	 */
-	public char[] dodajSlovo(char slovo, Boolean b) {
+	public char[] dodajSlovo(char slovo) {
 		if (trazenaRec.toUpperCase().indexOf(slovo) != -1){
 			for (int i = 0; i < trazenaRec.toUpperCase().length(); i++) {
 				if (trazenaRec.toUpperCase().charAt(i) == slovo) {
 					recZaPrikazNiz[i] = slovo;
 				}
 			}
-			b = false;
+			return recZaPrikazNiz;
 		}else {
 			povecajBrojPromasaja();
-			b = true;
+			return new char [0];
 		}
-		return recZaPrikazNiz;
 
 	}
 
