@@ -34,10 +34,7 @@ public class Igrac implements Serializable {
 	private Igrica igrica;
 	private int indexReci;
 	private String kategorija;
-	/*
-	 * @param ime Konstruktor postavlja vrednost polja ime na vrednost unetog
-	 * atributa i inicijalizuje gore pomenute liste indeksa.
-	 */
+	
 
 	public int getIndexReci() {
 		return indexReci;
@@ -53,7 +50,10 @@ public class Igrac implements Serializable {
 		return igrica.vratiRecZaPrikaz();
 
 	}
-
+	/*
+	 * @param ime Konstruktor postavlja vrednost polja ime na vrednost unetog
+	 * atributa i inicijalizuje gore pomenute liste indeksa.
+	 */
 	public Igrac(String ime) {
 		this.ime = ime;
 		knjige = new LinkedList<>();
