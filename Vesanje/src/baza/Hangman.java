@@ -16,6 +16,7 @@ public class Hangman {
 	
 	public Hangman(){
 		igraci = new Igraci();
+		indexTrenutnogIgraca = -1;
 	}
 	
 	public boolean incijalizujIgraca(String ime) {
