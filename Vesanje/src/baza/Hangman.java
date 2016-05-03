@@ -1,5 +1,15 @@
 package baza;
 
+import sistemskeoperacije.SODaLiJeIgracIzgubio;
+import sistemskeoperacije.SODaLiJeIgracPogodioCeluRec;
+import sistemskeoperacije.SODodajSlovo;
+import sistemskeoperacije.SOInicijalizujIgraca;
+import sistemskeoperacije.SOPokreniPartiju;
+import sistemskeoperacije.SOSacuvajIgrace;
+import sistemskeoperacije.SOVratiBrojPromasaja;
+import sistemskeoperacije.SOVratiIgraca;
+import sistemskeoperacije.SOVratiKategorije;
+
 public class Hangman {
 	private Igraci igraci;
 	private int indexTrenutnogIgraca;
@@ -9,43 +19,38 @@ public class Hangman {
 	}
 	
 	public boolean incijalizujIgraca(String ime) {
-		if (!igraci.daLiPostoji(ime)) {
-			igraci.dodajIgraca(ime);
-			return true;
-		}
-		indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
-		return false;
+		return SOInicijalizujIgraca.izvrsi(ime, igraci, indexTrenutnogIgraca);
 	}
 
 	public Igrac vratiIgraca() {
-		return igraci.vratiIgraca(indexTrenutnogIgraca);
+		return SOVratiIgraca.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 
 	public char [] pokreniPartiju(String kategorija) {
-		return igraci.vratiIgraca(indexTrenutnogIgraca).pokreniIgricu(kategorija);
+		return SOPokreniPartiju.izvrsi(kategorija, igraci, indexTrenutnogIgraca);
 	}
 	
 	public String [] vratiKategorije(){
-		return igraci.vratiIgraca(indexTrenutnogIgraca).vratiKategorije();
+		return SOVratiKategorije.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 
 	public void sacuvajIgrace() {
-		igraci.serijalizujIgrace();
+		SOSacuvajIgrace.izvrsi(igraci);
 	}
 	
 	public boolean daLiJeIgracIzgubio(){
-		return vratiIgraca().getIgrica().daLiJeIzgubio();
+		return SODaLiJeIgracIzgubio.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 	
 	public boolean daLiJeIgracPogodioCeluRec(){
-		return vratiIgraca().getIgrica().daLiJePogodioCeluRec();
+		return SODaLiJeIgracPogodioCeluRec.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 	
 	public char [] dodajSlovo(char slovo){
-		return vratiIgraca().getIgrica().dodajSlovo(slovo);
+		return SODodajSlovo.izvrsi(slovo, igraci, indexTrenutnogIgraca);
 	}
 	
 	public int vratiBrojPromasaja(){
-		return vratiIgraca().getIgrica().getBrojPromasaja();
+		return SOVratiBrojPromasaja.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 }
