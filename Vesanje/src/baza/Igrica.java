@@ -12,20 +12,16 @@ public class Igrica {
 	private int brojPromasaja;
 
 	/*
-	 * Atribut predstavlja kategoriju za koju se odlucio igrac.
-	 */
-
-	/*
 	 * Atribut predstavlja indeks reci u nizu kategorije kojoj pripada.
 	 */
-	private char [] recZaPrikazNiz;
+	private char[] recZaPrikazNiz;
+
 	/*
-	 * @param igrac Metodi se prosledjuje igrac koji trenutno igra.
+	 * @param trazenaRec Predstavlja pojam za kojim igrac traga.
 	 * 
-	 * Konstruktor postavlja vrednosti gore pomenutih atributa na odredjene
-	 * vrednosti. trazenaRec postaje prazan String, igrac se postavlja na
-	 * vrednost unetu kao parametar, a broj promasaja na 0, cime je
-	 * inicijalizovana igrica.
+	 * Kontstruktor inicijalizuje klasu i uvodi novu trazenu rec, pocinje da
+	 * broji broj promasaja i inicijalizuje rec koja ce biti prikazana nakon
+	 * pokusaja pogadjanja.
 	 */
 	public Igrica(String trazenaRec) {
 		this.trazenaRec = trazenaRec;
@@ -56,31 +52,17 @@ public class Igrica {
 	// }
 
 	/*
-	 * @return Metoda vraca igraca koji pogadja.
+	 * @return Metoda vraca rec za prikaz nakon inicijalizacije igrice.
+	 * 
+	 * Nakon sto igrica otpocne sa radom i sto se odredi pojam za kojim se
+	 * traga, napravi se niz koji se sastoji od zvezdica na mestima gde su slova
+	 * koji ce biti prikazan igracu pri inicijalizaciji da pokaze koliko rec
+	 * slova ima.
 	 */
 
-	/*
-	 * @param kategorija Metodi se prosledjuje kategorija za koju se odlucio
-	 * igrac.
-	 * 
-	 * @return Metoda vraca String koji se sastoji od zvezdica na mestima gde su
-	 * slova, dok prazna mesta ostaju prazna mesta.
-	 * 
-	 * Metoda kreira nov objekat klase Kategorija, koja je jednaka onoj
-	 * kategoriji koju je igrac odabrao. Nakon toga, pomocu klase Random se
-	 * kreira nasumican ceo broj koji se koristi kao indeks pojma u okviru niza
-	 * pojmova odabrane kategorije (u klasi Kategorije). Potom se proverava
-	 * koliko je pojmova igrac pogodio u okviru odabrane kategorije. Ukoliko je
-	 * pogodio sve pojmove, metoda vraca String "greska", a u suprotnom se traga
-	 * za pojmom koji igrac nije pogodio i vrednost atributa trazenaRec se
-	 * postavlja na tu rec. Potom se kreira String sastavljen od * na mestima
-	 * gde su slova u trazenoj reci i taj String se vraca kao povratna vrednost.
-	 * 
-	 */
-	
-	public char [] vratiRecZaPrikaz() {
+	public char[] vratiRecZaPrikaz() {
 		String recZaPrikaz = "";
-	
+
 		for (int i = 0; i < trazenaRec.length(); i++) {
 			if (trazenaRec.charAt(i) != ' ')
 				recZaPrikaz += '*';
@@ -105,30 +87,46 @@ public class Igrica {
 	 * obliku niza.
 	 */
 	public char[] dodajSlovo(char slovo) {
-		if (trazenaRec.toUpperCase().indexOf(slovo) != -1){
+		if (trazenaRec.toUpperCase().indexOf(slovo) != -1) {
 			for (int i = 0; i < trazenaRec.toUpperCase().length(); i++) {
 				if (trazenaRec.toUpperCase().charAt(i) == slovo) {
 					recZaPrikazNiz[i] = slovo;
 				}
 			}
 			return recZaPrikazNiz;
-		}else {
+		} else {
 			povecajBrojPromasaja();
-			return new char [0];
+			return new char[0];
 		}
 
 	}
 
-
 	// Marina: Bio je ovde bag, recZaPrikazNiz kad se konvertuje
 	// u String daje adresu, a ne taj string
-//	if (String.copyValueOf(recZaPrikazNiz).toUpperCase().equals(igrica.getTrazenaRec().toUpperCase())) {
-//		igrica.igracJePobedio();
-//		btnOk.setVisible(false);
-//		setVisible(false);
-//		dispose();
-//	}
-//	}
+	// if
+	// (String.copyValueOf(recZaPrikazNiz).toUpperCase().equals(igrica.getTrazenaRec().toUpperCase()))
+	// {
+	// igrica.igracJePobedio();
+	// btnOk.setVisible(false);
+	// setVisible(false);
+	// dispose();
+	// }
+	// }
+
+	/*
+	 * @return Metoda vraca boolean vrednost koja pokazuje da li je igrac
+	 * pogodio celu rec ili nije.
+	 * 
+	 * Ukoliko je rec koju je korisnik uneo jednaka trazenoj reci(pojmu) onda
+	 * metoda vraca true, a u suprotnom vraca false.
+	 */
+	public boolean daLiJePogodioCeluRec() {
+		for (int i = 0; i < recZaPrikazNiz.length; i++) {
+			if (recZaPrikazNiz[i] == '*')
+				return false;
+		}
+		return true;
+	}
 
 	/*
 	 * @param text metodi se prosledjuje tekst koji igrac unese.
@@ -140,22 +138,25 @@ public class Igrica {
 	 * tekst jednak pojmu koji se trazi. Ako jeste, metoda vraca true, a u
 	 * suprotnom vraca false.
 	 */
-	public boolean daLiJePogodioCeluRec() {
-		for (int i = 0; i < recZaPrikazNiz.length; i++) {
-			if(recZaPrikazNiz[i] == '*')return false;
-		}
-		return true;
-	}
-	
-	public boolean probajOdjednom(String text){
-		if (text.equalsIgnoreCase(trazenaRec))return true;
+	public boolean probajOdjednom(String text) {
+		if (text.equalsIgnoreCase(trazenaRec))
+			return true;
 		else {
 			povecajBrojPromasaja();
 			return false;
 		}
 	}
-	
-	public boolean daLiJeIzgubio(){
+
+	/*
+	 * @return Metoda vraca boolean vrednost koja pokazuje da li je igrac
+	 * izgubio ili nije.
+	 * 
+	 * U slucaju da je broj promasaja jednak 6 onda metoda vraca true, jer je
+	 * igrac izgubio, a u suprotnom vraca false jer igrac ima pravo jos da traga
+	 * za pojmom.
+	 */
+
+	public boolean daLiJeIzgubio() {
 		if (getBrojPromasaja() == 6) {
 			return true;
 		}

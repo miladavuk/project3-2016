@@ -59,7 +59,7 @@ public class GUIKontrolor {
 	 * Metoda otvara glavni prozor i omogucava igracu da pocne sa pogadjanjem.
 	 * 
 	 * @throws Exception Metoda baca izuzetak u slucaju da se glavni prozor ne
-	 * prikaze.\
+	 * prikaze.
 	 */
 	public static void prikaziGlavniProzor() {
 		EventQueue.invokeLater(new Runnable() {
@@ -169,12 +169,6 @@ public class GUIKontrolor {
 			hangman.sacuvajIgrace();
 			System.exit(0);
 		}
-		// By Luka:
-		// if(opcija==JOptionPane.NO_OPTION){
-		// igraci.serijalizujIgrace();
-		// sad ne znam kako se gasi ovaj optionPane, mislio sam da se ugasi, a
-		// ne da se otvara novi glavni prozor :D
-		// }
 
 	}
 
@@ -255,7 +249,7 @@ public class GUIKontrolor {
 	}
 
 	public static void zapocniIgru() {
-		if(vratiTrenutnogIgraca() != null) {
+		if (vratiTrenutnogIgraca() != null) {
 			if(hangman.vratiKategorije().length == 0) prikaziPresaoIgricu();
 			else prikaziGlavniProzor();
 		}
