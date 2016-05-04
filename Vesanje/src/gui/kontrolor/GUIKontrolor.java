@@ -216,6 +216,7 @@ public class GUIKontrolor {
 	public static void probajCeluRec() {
 		if (hangman.daLiJeIgracIzgubio()) {
 			igracJeIzgubio();
+			return;
 		}
 		if (hangman.daLiJeIgracPogodioCeluRec()) {
 			igracJePobedio();

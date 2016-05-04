@@ -43,13 +43,6 @@ public class Igrica {
 		return brojPromasaja;
 	}
 
-	// public LinkedList<Character> getKoriscenaSlova() {
-	// return koriscenaSlova;
-	// }
-
-	// public int getBrojKoriscenihSlova() {
-	// return brojKoriscenihSlova;
-	// }
 
 	/*
 	 * @return Metoda vraca rec za prikaz nakon inicijalizacije igrice.
@@ -157,7 +150,7 @@ public class Igrica {
 	 */
 
 	public boolean daLiJeIzgubio() {
-		if (getBrojPromasaja() == 6) {
+		if (getBrojPromasaja() >= 6) {
 			return true;
 		}
 		return false;

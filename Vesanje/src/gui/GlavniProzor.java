@@ -163,30 +163,8 @@ public class GlavniProzor extends JFrame {
 	private JComboBox<String> getComboBoxKategorije() {
 		if (comboBoxKategorije == null) {
 			comboBoxKategorije = new JComboBox<String>();
-//			comboBoxKategorije.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent arg0) {
-//					// GUIKontrolor.brojPromasaja=0;
-//					char [] recZaPrikazNiz = GUIKontrolor.namestiKategoriju(comboBoxKategorije.getSelectedItem().toString());
-//					if (recZaPrikazNiz.length > 1){
-//						table.setModel(new TabelaZaRec(recZaPrikazNiz));
-//						table.setTableHeader(null);
-//					}
-////						JOptionPane.showMessageDialog(getContentPane(),
-////								"You have guessed all from that category, please choose the other one!");
-//
-//
-//					// comboBoxKategorije.setEditable(false);
-//				}
-//
-//			});
 			comboBoxKategorije.setPreferredSize(new Dimension(100, 25));
 			comboBoxKategorije.setModel(new DefaultComboBoxModel<>(kategorije));
-//			comboBoxKategorije.addItem("Movies");
-//			comboBoxKategorije.addItem("Countries");
-//			comboBoxKategorije.addItem("Classical books");
-//			comboBoxKategorije.addItem("Historical people");
-//			comboBoxKategorije.addItem("Famous people");
-//			comboBoxKategorije.addItem("Famous brands");
 		}
 
 		return comboBoxKategorije;
@@ -397,8 +375,8 @@ public class GlavniProzor extends JFrame {
 					char [] recZaPrikazNiz;
 					if((recZaPrikazNiz = GUIKontrolor.ubaciSlovo(slovo)).length > 0){
 						table.setModel(new TabelaZaRec(recZaPrikazNiz));
-						GUIKontrolor.probajCeluRec();
 					}else promeniSliku();
+					GUIKontrolor.probajCeluRec();
 				}
 			});
 		}
