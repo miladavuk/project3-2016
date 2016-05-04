@@ -48,7 +48,6 @@ public class PocetniProzor extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
 
 	/**
 	 * Create the frame.
@@ -84,18 +83,20 @@ public class PocetniProzor extends JFrame {
 		}
 		return jpnlGameButtons;
 	}
+
 	private JButton getJbtnNewGame() {
 		if (jbtnNewGame == null) {
 			jbtnNewGame = new JButton("New Game");
 			jbtnNewGame.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-						GUIKontrolor.zapocniIgru();
-					}
+					GUIKontrolor.zapocniIgru();
+				}
 			});
 			jbtnNewGame.setPreferredSize(new Dimension(130, 30));
 		}
 		return jbtnNewGame;
 	}
+
 	private JButton getJbtnInstructions() {
 		if (jbtnInstructions == null) {
 			jbtnInstructions = new JButton("Instructions");
@@ -109,6 +110,7 @@ public class PocetniProzor extends JFrame {
 		}
 		return jbtnInstructions;
 	}
+
 	private JButton getJbtnExit() {
 		if (jbtnExit == null) {
 			jbtnExit = new JButton("Exit");
@@ -117,11 +119,12 @@ public class PocetniProzor extends JFrame {
 					GUIKontrolor.ugasiAplikaciju();
 				}
 			});
-			
+
 			jbtnExit.setPreferredSize(new Dimension(130, 30));
 		}
 		return jbtnExit;
 	}
+
 	private JPanel getJpnlPlayerButtons() {
 		if (jpnlPlayerButtons == null) {
 			jpnlPlayerButtons = new JPanel();
@@ -134,6 +137,7 @@ public class PocetniProzor extends JFrame {
 		}
 		return jpnlPlayerButtons;
 	}
+
 	private JLabel getLblPlayer() {
 		if (jlblPlayer == null) {
 			jlblPlayer = new JLabel("Player:");
@@ -143,6 +147,7 @@ public class PocetniProzor extends JFrame {
 		}
 		return jlblPlayer;
 	}
+
 	private JTextField getJtxtPlayer() {
 		if (jtxtPlayer == null) {
 			jtxtPlayer = new JTextField();
@@ -152,28 +157,35 @@ public class PocetniProzor extends JFrame {
 		}
 		return jtxtPlayer;
 	}
+
 	private JButton getBtnOk() {
 		if (jbtnOk == null) {
 			jbtnOk = new JButton("OK");
 			jbtnOk.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String igrac = jtxtPlayer.getText();
-					if(igrac.isEmpty())jlblError.setText("You didn't enter any name!");
-					else if(GUIKontrolor.incijalizujIgraca(igrac)) jlblError.setText("New player is created!");
-					else jlblError.setText("Welcome back " + igrac + "!");
+					if (igrac.isEmpty())
+						jlblError.setText("You didn't enter any name!");
+					else if (GUIKontrolor.incijalizujIgraca(igrac))
+						jlblError.setText("New player is created!");
+					else
+						jlblError.setText("Welcome back " + igrac + "!");
 				}
 			});
 			jbtnOk.setPreferredSize(new Dimension(50, 30));
 		}
 		return jbtnOk;
 	}
+
 	private JButton getBtnSeeYourScore() {
 		if (jbtnSeeYourScore == null) {
 			jbtnSeeYourScore = new JButton("See your score!");
 			jbtnSeeYourScore.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					if(GUIKontrolor.vratiTrenutnogIgraca() == null) jlblError.setText("You haven't chosen your player!");
-					else GUIKontrolor.prozorZaScore();
+					if (GUIKontrolor.vratiTrenutnogIgraca() == null)
+						jlblError.setText("You haven't chosen your player!");
+					else
+						GUIKontrolor.prozorZaScore();
 				}
 			});
 			jbtnSeeYourScore.setForeground(Color.BLUE);
@@ -182,12 +194,13 @@ public class PocetniProzor extends JFrame {
 		}
 		return jbtnSeeYourScore;
 	}
+
 	private JPanel getJpnlSlika() {
 		if (jpnlSlika == null) {
 			jpnlSlika = new JPanel();
 			jpnlSlika.setPreferredSize(new Dimension(10, 140));
 		}
-		
+
 		BufferedImage slikaminiona;
 		try {
 			slikaminiona = ImageIO.read(this.getClass().getResource("/resursi/funminions.jpg"));
@@ -199,6 +212,7 @@ public class PocetniProzor extends JFrame {
 		}
 		return jpnlSlika;
 	}
+
 	private JLabel getJlblError() {
 		if (jlblError == null) {
 			jlblError = new JLabel("");
