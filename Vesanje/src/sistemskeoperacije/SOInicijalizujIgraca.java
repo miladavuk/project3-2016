@@ -19,13 +19,12 @@ public class SOInicijalizujIgraca {
 	 * igraca. U suprotnom, metoda kreira novog igraca i ubacuje ga u listu.
 	 * 
 	 */
-	public static boolean izvrsi(String ime, Igraci igraci, int indexTrenutnogIgraca) {
+	public static boolean izvrsi(String ime, Igraci igraci) {
 		if (!igraci.daLiPostoji(ime)) {
 			igraci.dodajIgraca(ime);
 			return true;
 		}
-		indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
-		return false;
+		return  false;
 	}
 
 }

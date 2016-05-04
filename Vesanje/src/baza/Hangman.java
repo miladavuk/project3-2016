@@ -36,7 +36,9 @@ public class Hangman {
 	 * igrac ili je pak uzet indeks igraca koji je ranije igrao.
 	 */
 	public boolean incijalizujIgraca(String ime) {
-		return SOInicijalizujIgraca.izvrsi(ime, igraci, indexTrenutnogIgraca);
+		boolean b =  SOInicijalizujIgraca.izvrsi(ime, igraci);
+		indexTrenutnogIgraca = igraci.vratiIndexIgraca(ime);
+		return b;
 	}
 
 	/*
