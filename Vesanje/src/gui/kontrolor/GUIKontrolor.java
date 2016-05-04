@@ -172,7 +172,6 @@ public class GUIKontrolor {
 
 	}
 
-	
 	public static void prikaziPresaoIgricu() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -185,6 +184,7 @@ public class GUIKontrolor {
 			}
 		});
 	}
+
 	/*
 	 * @return Metoda vraca igraca koji trenutno igra.
 	 */
@@ -204,73 +204,104 @@ public class GUIKontrolor {
 	/*
 	 * @param ime Metodi se prosledjuje ime igraca.
 	 * 
-	 * @return Metoda vraca boolean vrednost koja pokazuje da li je igrac vec
-	 * ranije igrao ili nije. Ukoliko nije, metoda vraca true, a u suprotnom
-	 * vraca false.
-	 * 
-	 * Metoda proverava da li se u listi igraca postoji igrac sa imenom koji je
-	 * unet kao parametar. Ako ne postoji, metoda kreira novog igraca u listi sa
-	 * tim imenom i postavlja indeks trenutnog igraca ne njegov indeks. Ako
-	 * igrac vec postoji u listi, nalazi se njegov indeks i indeks trenutnog
-	 * igraca se postavlja na tu vrednodt
+	 * @return Metoda poziva metodu za inicijaliziranje igrice za datog igraca.
 	 */
 	public static boolean incijalizujIgraca(String ime) {
 		return hangman.incijalizujIgraca(ime);
 	}
 
+	/*
+	 * 
+	 */
 	public static void probajCeluRec() {
-		if(hangman.daLiJeIgracIzgubio()){
+		if (hangman.daLiJeIgracIzgubio()) {
 			igracJeIzgubio();
 		}
-		if(hangman.daLiJeIgracPogodioCeluRec()){
+		if (hangman.daLiJeIgracPogodioCeluRec()) {
 			igracJePobedio();
 		}
 	}
 
+	/*
+	 * Ukoliko je igrac izgubio zatvara se prozor za igricu i otvara dijalog za
+	 * poraz.
+	 */
 	private static void igracJeIzgubio() {
 		hangman.vratiIgraca().igracJeIzgubio();
 		glavniProzor.dispose();
 		prikaziPoraz();
 	}
 
+	/*
+	 * Ukoliko je igrac pobedio zatvara se prozor za igricu i otvara dijalog za
+	 * pobedu.
+	 */
 	private static void igracJePobedio() {
 		hangman.vratiIgraca().igracJePobedio();
 		glavniProzor.dispose();
 		prikaziPobedu();
 	}
 
+	/*
+	 * Metoda zatvara glavni prozor ako igrac odustane od igrice.
+	 */
 	public static void odustani() {
 		hangman.vratiIgraca().igracJeIzgubio();
 		glavniProzor.dispose();
 	}
 
+	/*
+	 * Metoda dodaje slovo koje je igrac odabrao.
+	 */
 	public static char[] ubaciSlovo(char slovo) {
 		return hangman.dodajSlovo(slovo);
 	}
 
+	/*
+	 * Ukoliko je igrac pogodio sve pojmove iz sve kategorije metoda izbacuje
+	 * dijaloga da ga obavesti o tome. U suprotnom, otvara se prozor sa igricom.
+	 * Ako pak igrac nije uneo svoje ime, metoda poziva metodu da ga upozori o
+	 * tome.
+	 */
 	public static void zapocniIgru() {
 		if (vratiTrenutnogIgraca() != null) {
-			if(hangman.vratiKategorije().length == 0) prikaziPresaoIgricu();
-			else prikaziGlavniProzor();
-		}
-		else upozoriDaNijeIzabranIgrac();
+			if (hangman.vratiKategorije().length == 0)
+				prikaziPresaoIgricu();
+			else
+				prikaziGlavniProzor();
+		} else
+			upozoriDaNijeIzabranIgrac();
 	}
 
+	/*
+	 * @return Metoda vraca rec za prikaz u obliku * i praznih mesta iz odabrane
+	 * kategorije.
+	 */
 	public static char[] pokreniPartiju(String kategorija) {
 		return hangman.pokreniPartiju(kategorija);
 	}
 
+	/*
+	 * @return Metoda vraca broj promasaja igraca.
+	 */
 	public static int vratiBrojPromasaja() {
 		return hangman.vratiBrojPromasaja();
 	}
-	
-	public static boolean probajOdjednom(String text){
-		if(hangman.vratiIgraca().getIgrica().probajOdjednom(text)){
+
+	/*
+	 * @return Metoda vraca boolean koji oznacava da li je igrac pogodio celu
+	 * rec odjednom.
+	 * 
+	 * Ukoliko igrac pogodi celu rec, glavni prozor se zatvara i poziva se
+	 * metoda za pobedu. U suprotnom se vraca false.
+	 */
+	public static boolean probajOdjednom(String text) {
+		if (hangman.vratiIgraca().getIgrica().probajOdjednom(text)) {
 			glavniProzor.dispose();
 			igracJePobedio();
 			return true;
-		}else return false;
+		} else
+			return false;
 	}
-	
-	
+
 }

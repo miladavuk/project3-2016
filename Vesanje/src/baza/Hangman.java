@@ -90,6 +90,7 @@ public class Hangman {
 
 	/*
 	 * @return Metoda vraca broj promasaja igraca.
+	 * 
 	 */
 	public int vratiBrojPromasaja() {
 		return SOVratiBrojPromasaja.izvrsi(igraci, indexTrenutnogIgraca);
