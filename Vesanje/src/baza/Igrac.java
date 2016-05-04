@@ -255,11 +255,11 @@ public class Igrac implements Serializable {
 	}
 
 	/*
-	 * @return Metoda vraca kategoriju pojmova koju igrac moze da izabere.
+	 * @return Metoda vraca niz kategorije pojmova koju igrac moze da izabere.
 	 * 
 	 * Metoda proverava da li je igrac pogodio sve pojmove iz odregjene
 	 * kategorije. Ukoliko nije, naziv pojma se dodaje u listu, koja se kasnije
-	 * konvertuje u String i vraca kao povratna vrednost.
+	 * konvertuje u niz Stringova i vraca kao povratna vrednost.
 	 * 
 	 * 
 	 */

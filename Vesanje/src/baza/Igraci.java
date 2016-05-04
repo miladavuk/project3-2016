@@ -104,8 +104,10 @@ public class Igraci implements Serializable {
 	 * @return Metoda vraca igraca iz liste kojem pripada taj indeks.
 	 */
 	public Igrac vratiIgraca(int index) {
-		if(index < 0 || index >= igraci.size())return null;
-		else return igraci.get(index);
+		if (index < 0 || index >= igraci.size())
+			return null;
+		else
+			return igraci.get(index);
 	}
 
 	/*
