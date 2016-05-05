@@ -32,9 +32,7 @@ import gui.kontrolor.tabele.TabelaZaRec;
 
 public class GlavniProzor extends JFrame {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panelZaRec;

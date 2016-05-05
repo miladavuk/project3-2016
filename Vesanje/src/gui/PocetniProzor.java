@@ -28,9 +28,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class PocetniProzor extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel jpnlGameButtons;
@@ -45,13 +43,6 @@ public class PocetniProzor extends JFrame {
 	private JPanel jpnlSlika;
 	private JLabel jlblError;
 
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
-	 */
 	public PocetniProzor() {
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {

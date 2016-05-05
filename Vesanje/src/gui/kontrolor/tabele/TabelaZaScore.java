@@ -9,30 +9,24 @@ import javax.swing.table.AbstractTableModel;
 import baza.Igrac;
 
 public class TabelaZaScore extends AbstractTableModel {
-	/*
+	/**
 	 * Atribut predstavlja igraca.
 	 */
 	private Igrac igrac;
 
-	/*
-	 * @param igrac Metodi se prosledjuje igrac. Konstruktor postavlja vrednost
+	/**
+	 * @param igrac 
+	 * Metodi se prosledjuje igrac. Konstruktor postavlja vrednost
 	 * promenljive igrac na vrednost unetu kao parametar.
 	 */
 	public TabelaZaScore(Igrac igrac) {
 		this.igrac = igrac;
 	}
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.table.TableModel#getColumnCount()
-	 * 
+	/**
 	 * Metoda vraca broj kolona, u ovom slucaju to je 6.
 	 */
 	public int getColumnCount() {
@@ -41,10 +35,8 @@ public class TabelaZaScore extends AbstractTableModel {
 	}
 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.table.TableModel#getRowCount() Metoda vraca broj redova,
+	/**
+	 *Metoda vraca broj redova,
 	 * u ovom slucaju postoji jedan red.
 	 */
 	public int getRowCount() {
@@ -53,13 +45,10 @@ public class TabelaZaScore extends AbstractTableModel {
 	}
 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.table.TableModel#getValueAt(int, int)
-	 * 
+	/**	 
 	 * Metoda vraca, u zavisnosti od unetog parametra za broj redova, broj
 	 * pogodjenih pojmova za datog igraca po svakoj kategoriji.
+	 * @param rowCount, columnCount
 	 */
 	public Object getValueAt(int rowCount, int columnCount) {
 		if (igrac == null)
@@ -83,13 +72,10 @@ public class TabelaZaScore extends AbstractTableModel {
 	}
 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.table.AbstractTableModel#getColumnName(int)
-	 * 
+	/**
 	 * Metoda u zavisnosti od vrednosti unetog parametra vraca vrednost
 	 * odgovarajuce kategorije pojmova.
+	 * @param column
 	 * 
 	 */
 	public String getColumnName(int column) {

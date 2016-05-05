@@ -23,9 +23,6 @@ import gui.kontrolor.tabele.TabelaZaScore;
 
 public class Score extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -36,14 +33,6 @@ public class Score extends JFrame {
 	private JScrollPane scrollPane;
 	private JTable jtblScore;
 
-	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the frame.
-	 */
 	public Score() {
 		setTitle("Score");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Score.class.getResource("/resursi/ghosticon.png")));

@@ -18,9 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 public class Intructions extends JFrame {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
@@ -28,14 +26,6 @@ public class Intructions extends JFrame {
 	private JPanel panel;
 	private JButton jbtnOk;
 
-	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the frame.
-	 */
 	public Intructions() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Intructions.class.getResource("/resursi/ghosticon.png")));
 		setTitle("Hangman");

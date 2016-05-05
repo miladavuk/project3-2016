@@ -4,23 +4,21 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Random;
 
-/*
+/**
  * 		Klasa sadrzi osnovne informacije o igracu. 
  * 		Svi podaci o igracima se serijalizuju.
  * 		Sadrzi informacije o tome koje pojmove iz odredjene kategorije je igrac uspeo da pogodi.
  */
 
 public class Igrac implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	/*
+	/**
 	 * Atribut oznacava ime igraca.
 	 */
 	private String ime;
 
-	/*
+	/**
 	 * Ovi atributi predstavljaju listu indeksa pojmova iz nizova kategorija,
 	 * koje je igrac uspeo da pogodi.
 	 */
@@ -31,39 +29,41 @@ public class Igrac implements Serializable {
 	private LinkedList<Integer> poznateLicnosti;
 	private LinkedList<Integer> istorijskeLicnosti;
 
-	/*
+	/**
 	 * Atribut predstavlja igricu koja je inicijalizovana.
 	 */
 	private Igrica igrica;
-	/*
+	/**
 	 * Atribut predstavlja indeks reci koja se pogadja.
 	 */
 	private int indexReci;
-	/*
+	/**
 	 * Atribut predstavlja kategoriju pojma koji se pogadja.
 	 */
 	private String kategorija;
 
-	/*
-	 * @return Metoda vraca indeks reci koju igrac pogadja iz odredjene
+	/**
+	 * Metoda vraca indeks reci koju igrac pogadja iz odredjene
 	 * kategorije.
+	 * @return indexReci
 	 */
 	public int getIndexReci() {
 		return indexReci;
 	}
 
-	/*
-	 * @return Metoda vraca igricu koja je trenutno pokrenuta.
+	/**
+	 * Metoda vraca igricu koja je trenutno pokrenuta.
+	 * @return igrica
 	 */
 
 	public Igrica getIgrica() {
 		return igrica;
 	}
 
-	/*
-	 * @param kategorija Metodi se prosledjuje kategorija pojma koji se pogadja.
+	/**
+	 * @param kategorija Kategorija reci
 	 * 
-	 * @return Metoda vraca rec koja ce biti prikazana.
+	 * @return igrica.vratiRecZaPrikaz().
 	 * 
 	 * Metoda vraca niz karaktera koji se sastoji od * na mestima na koja se
 	 * nalaze slova.
@@ -75,8 +75,9 @@ public class Igrac implements Serializable {
 
 	}
 
-	/*
-	 * @param ime Konstruktor postavlja vrednost polja ime na vrednost unetog
+	/**
+	 * @param ime 
+	 * Konstruktor postavlja vrednost polja ime na vrednost unetog
 	 * atributa i inicijalizuje gore pomenute liste indeksa.
 	 */
 	public Igrac(String ime) {
@@ -89,114 +90,125 @@ public class Igrac implements Serializable {
 		istorijskeLicnosti = new LinkedList<>();
 	}
 
-	/*
-	 * @return Metoda vraca vrednost atributa ime.
+	/**
+	 * @return ime
+	 * Metoda vraca vrednost atributa ime.
 	 */
 	public String getIme() {
 		return ime;
 	}
 
-	/*
-	 * @return Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
+	/**
+	 * @return knjige
+	 * Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
 	 * knjige.
 	 */
 	public LinkedList<Integer> getKnjige() {
 		return knjige;
 	}
 
-	/*
-	 * @return Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
+	/**
+	 * @return drzave
+	 * Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
 	 * drzave.
 	 */
 	public LinkedList<Integer> getDrzave() {
 		return drzave;
 	}
 
-	/*
-	 * @return Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
+	/**
+	 * @return filmovi
+	 * Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
 	 * filmovi.
 	 */
 	public LinkedList<Integer> getFilmovi() {
 		return filmovi;
 	}
 
-	/*
-	 * @return Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
+	/**
+	 * @return brendovi
+	 * Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
 	 * brendovi.
 	 */
 	public LinkedList<Integer> getBrendovi() {
 		return brendovi;
 	}
 
-	/*
-	 * @return Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
+	/**
+	 * @return poznateLicnosti
+	 * Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
 	 * poznate licnosti.
 	 */
 	public LinkedList<Integer> getPoznateLicnosti() {
 		return poznateLicnosti;
 	}
 
-	/*
-	 * @return Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
+	/**
+	 * @return istorijskeLicnosti
+	 * Metoda vraca listu indeksa pogodjenih pojmova za kategoriju
 	 * istorijske licnosti.
 	 */
 	public LinkedList<Integer> getIstorijskeLicnosti() {
 		return istorijskeLicnosti;
 	}
 
-	/*
-	 * @param index Indeks pogodjenog pojma iz kategorije knjige se ubacuje u
+	/**
+	 * @param index 
+	 * Indeks pogodjenog pojma iz kategorije knjige se ubacuje u
 	 * listu indeksa za tu kategoriju.
 	 */
 	public void ubaciKnjigu(int index) {
 		knjige.add(new Integer(index));
 	}
 
-	/*
-	 * @param index Indeks pogodjenog pojma iz kategorije drzave se ubacuje u
+	/**
+	 * @param index 
+	 * Indeks pogodjenog pojma iz kategorije drzave se ubacuje u
 	 * listu indeksa za tu kategoriju.
 	 */
 	public void ubaciDrzavu(int index) {
 		drzave.add(new Integer(index));
 	}
 
-	/*
-	 * @param index Indeks pogodjenog pojma iz kategorije filmovi se ubacuje u
+	/**
+	 * @param index 
+	 * Indeks pogodjenog pojma iz kategorije filmovi se ubacuje u
 	 * listu indeksa za tu kategoriju.
 	 */
 	public void ubaciFilm(int index) {
 		filmovi.add(new Integer(index));
 	}
 
-	/*
-	 * @param index Indeks pogodjenog pojma iz kategorije brendovi se ubacuje u
+	/**
+	 * @param index 
+	 * Indeks pogodjenog pojma iz kategorije brendovi se ubacuje u
 	 * listu indeksa za tu kategoriju.
 	 */
 	public void ubaciBrend(int index) {
 		brendovi.add(new Integer(index));
 	}
 
-	/*
-	 * @param index Indeks pogodjenog pojma iz kategorije istorijske licnosti se
+	/**
+	 * @param index 
+	 * Indeks pogodjenog pojma iz kategorije istorijske licnosti se
 	 * ubacuje u listu indeksa za tu kategoriju.
 	 */
 	public void ubaciIstorijskuLicnost(int index) {
 		istorijskeLicnosti.add(new Integer(index));
 	}
 
-	/*
-	 * @param index Indeks pogodjenog pojma iz kategorije poznate licnosti se
+	/**
+	 * @param index 
+	 * Indeks pogodjenog pojma iz kategorije poznate licnosti se
 	 * ubacuje u listu indeksa za tu kategoriju.
 	 */
 	public void ubaciPoznatuLicnost(int index) {
 		poznateLicnosti.add(new Integer(index));
 	}
 
-	/*
-	 * @param kategorija Metodi se prosledjuje kategorija pojma za pogadjanje.
-	 * 
-	 * @return Metoda vraca rec iz odredjene kategorije.
-	 * 
+	/**
+	 * @param kategorija	 Kategorija reci
+	 * @return reciIzKategorije[indexReci = vratiRandom(reci)]
 	 * U zavistosti od izabrane kategorije pojmova, metoda vraca rec iz
 	 * kategorije pozivanjem metode za odabir random reci. Uz pomoc liste reci
 	 * se odredjuje indeks moguceg pojma za odabir iz odgovarajuce kategorije.U
@@ -234,12 +246,9 @@ public class Igrac implements Serializable {
 		return reciIzKategorije[indexReci = vratiRandom(reci)];
 	}
 
-	/*
-	 * @param brojevi Metodi se prosledjuje lista indeksa pogodjenih reci od
-	 * strane igraca.
-	 * 
-	 * @return Metoda vraca random broj.
-	 * 
+	/**
+	 * @param brojevi Lista brojeva
+	 * @return randomBroj
 	 * Metoda generise random broj i proverava da li se nalazi u listi brojeva.
 	 * Ukoliko se nalazi, generise se naredni random broj, a u suprotnom se
 	 * vraca kao povratna vrednost.
@@ -254,8 +263,8 @@ public class Igrac implements Serializable {
 		return randomBroj;
 	}
 
-	/*
-	 * @return Metoda vraca niz kategorije pojmova koju igrac moze da izabere.
+	/**
+	 * @return kat.toArray(new String[0])
 	 * 
 	 * Metoda proverava da li je igrac pogodio sve pojmove iz odregjene
 	 * kategorije. Ukoliko nije, naziv pojma se dodaje u listu, koja se kasnije
@@ -280,7 +289,7 @@ public class Igrac implements Serializable {
 		return kat.toArray(new String[0]);
 	}
 
-	/*
+	/**
 	 * Metoda postavlja vrednost inicijalizovane igrice na null, ako igrac ne
 	 * uspe da pogodi pojam koji se trazi.
 	 */
@@ -288,7 +297,7 @@ public class Igrac implements Serializable {
 		igrica = null;
 	}
 
-	/*
+	/**
 	 * U slucaju da je igrac pogodio pojam, on se dodaje u listu pojmova koje je
 	 * igrac pogodio i gasi se inicijalizovana igrica.
 	 */

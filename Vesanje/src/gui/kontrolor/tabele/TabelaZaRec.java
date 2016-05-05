@@ -1,30 +1,28 @@
 package gui.kontrolor.tabele;
 
 import javax.swing.table.AbstractTableModel;
-/*
+/**
  * Klasa predtsavlja tabelu u kojoj ce se ispisivati pojam za kojim igrac traga. 
  */
 
 public class TabelaZaRec extends AbstractTableModel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-	/*
+	/**
 	 * Atribut oznacava niz karaktera koji predstavljaju pojam koji igrac treba
 	 * da pogodi.
 	 */
 	private char[] recZaPrikazNiz;
 
-	/*
-	 * @return Metoda vraca pomenuti niz karaktera.
+	/** Metoda vraca rec kao niz karaktera.
+	 * @return recZaPrikazNiz
 	 */
 	public char[] getRecZaPrikazNiz() {
 		return recZaPrikazNiz;
 	}
 
-	/*
-	 * @param recZaPrikaz Metodi se prosledjuje vrednost reci.
+	/**
+	 * @param recZaPrikaz 
 	 * 
 	 * Konstruktor postavlja vrednost atributa za rec na unetu vrednost. Potom
 	 * se inicijalizuje tabela.
@@ -36,12 +34,9 @@ public class TabelaZaRec extends AbstractTableModel {
 	}
 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.table.TableModel#getColumnCount() Metoda vraca broj
-	 * kolona, koji je jednak velicini niza u kom se cuva rec koja treba da se
-	 * pogodi.
+	/**
+	 *  Metoda vraca broj kolona, koji je jednak velicini niza u kom se cuva rec koja treba da se pogodi.
+	 *  @return recZaPrikazNiz.length
 	 */
 	public int getColumnCount() {
 
@@ -49,11 +44,8 @@ public class TabelaZaRec extends AbstractTableModel {
 	}
 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.table.TableModel#getRowCount() Metoda vraca broj redova,
-	 * u tom slucaju to je 1.
+	/**
+	 * Metoda vraca broj redova koji je uvek 1
 	 */
 	public int getRowCount() {
 
@@ -61,12 +53,10 @@ public class TabelaZaRec extends AbstractTableModel {
 	}
 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.table.TableModel#getValueAt(int, int) Metoda vraca
-	 * vrednost vrednost elemnta niza na poziciji u odredjenoj koloni, koja je
-	 * prosledjena kao parametar.
+	/**
+	 * Metoda vraca vrednost elemnta niza na poziciji u odredjenoj koloni, koja je prosledjena kao parametar.
+	 * @param rowIndex, columnIndex
+	 * @returnrecZaPrikazNiz[columnIndex]
 	 */
 	public Object getValueAt(int rowIndex, int columnIndex) {
 

@@ -21,9 +21,7 @@ import java.awt.Toolkit;
 
 public class PresaoIgricu extends JFrame {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 2345120619413977345L;
 	private JPanel contentPane;
 	private JPanel jpnlSlika;
@@ -34,14 +32,7 @@ public class PresaoIgricu extends JFrame {
 	private JButton btnOk;
 	private JPanel jpnlDugme;
 
-	/**
-	 * Launch the application.
-	 */
 	
-
-	/**
-	 * Create the frame.
-	 */
 	public PresaoIgricu() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PresaoIgricu.class.getResource("/resursi/ghosticon.png")));
 		setTitle("Hangman");

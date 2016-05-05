@@ -16,7 +16,7 @@ import gui.Poraz;
 import gui.PresaoIgricu;
 import gui.Score;
 
-/*
+/**
  *  Klasa sadrzi osnovne atribute i metode neophodne za 
  *  otvaranje svih prozora u okviru igrice. Pomocu ove
  *  klase se kontorlise otvaranje i zavarenje kako svih 
@@ -27,18 +27,18 @@ import gui.Score;
 public class GUIKontrolor {
 	public static GlavniProzor glavniProzor;
 	public static PocetniProzor pocetniProzor;
-	/*
+	/**
 	 * Lista u kojoj se nalaze igraci.
 	 */
 	public static Hangman hangman;
 
-	/*
+	
+	/**
 	 * Metoda inicijaluzuje atribut igraca i postavlja trenutni indeks igraca na
 	 * -1. Takodje, metoda otvara novi pocetni prozor, gde igrac moze da unese
 	 * svoje ime i da pocne sa igrom.
 	 * 
-	 * @throws Exception Metoda baca izuzetak u slucaju da se ne otvori pocetni
-	 * prozor.
+	 * @throws Exception Metoda baca izuzetak ako se ne pokrene PocetniProzor.
 	 */
 	public static void main(String[] args) {
 		hangman = new Hangman();
@@ -54,12 +54,11 @@ public class GUIKontrolor {
 		});
 	}
 
-	/*
+	/**
 	 * 
 	 * Metoda otvara glavni prozor i omogucava igracu da pocne sa pogadjanjem.
 	 * 
-	 * @throws Exception Metoda baca izuzetak u slucaju da se glavni prozor ne
-	 * prikaze.
+	 * @throws Exception Metoda baca izuzetak ako se ne prikaze GlavniProzor.
 	 */
 	public static void prikaziGlavniProzor() {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,10 +73,10 @@ public class GUIKontrolor {
 		});
 	}
 
-	/*
+	/**
 	 * Metoda otvara novi JDijalog Pobeda.
 	 * 
-	 * @throws Exception Metoda baca izuzetak u slucaju da se Pobeda ne otvori.
+	 * @throws Exception Metoda baca izuzetak ako se ne prikaze Pobeda.
 	 */
 	public static void prikaziPobedu() {
 		try {
@@ -89,10 +88,10 @@ public class GUIKontrolor {
 		}
 	}
 
-	/*
+	/**
 	 * Metoda otvara novi JDijalog Poraz.
 	 * 
-	 * @throws Exception Metoda baca izuzetak u slucaju da se Poraz ne otvori.
+	 * @throws Exception Metoda baca izuzetak ako se ne prikaze Poraz.
 	 */
 	public static void prikaziPoraz() {
 		try {
@@ -104,13 +103,13 @@ public class GUIKontrolor {
 		}
 	}
 
-	/*
+	/**
 	 * Metoda otvara novi prozor u kom je prikazan score za svaku kategoriju za
 	 * izabranog igraca. U slucaju da nije izabran igrac (indeks trenutnog
 	 * igraca jedank je -1), otvara se prozor koji upozorava da nije izabran
 	 * igrac.
 	 * 
-	 * @throws Exception Metoda baca izuzetak ako se prozor za Score ne otvori.
+	 * @throws Exception Metoda baca izuzetak ako se ne prikaze prozorZaScore.
 	 */
 	public static void prozorZaScore() {
 		if (hangman.vratiIgraca() == null) {
@@ -129,12 +128,11 @@ public class GUIKontrolor {
 		});
 	}
 
-	/*
+	/**
 	 * Metoda poziva prozor za instrukcije, u kojima je detaljno objasnjeno kako
 	 * se igra igrica.
 	 * 
-	 * @throws Exception Metoda baca izuzetak u slucaju da se prozor za
-	 * instrukcije ne otvori.
+	 * @throws Exception Metoda baca izuzetak ako se ne prikaze prozor za instrukcije.
 	 */
 	public static void pozoviInstrukcije() {
 		EventQueue.invokeLater(new Runnable() {
@@ -150,7 +148,7 @@ public class GUIKontrolor {
 		});
 	}
 
-	/*
+	/**
 	 * Metoda gasi aplikaciju tako sto se otvori prozor koji pita da li je igrac
 	 * siguran da zeli da napusti igricu. Ako jeste, onda se aplikacija gasi i
 	 * svi podaci o igracima se serijalizuju, a u suprotnom se vraca na pocetni
@@ -185,14 +183,15 @@ public class GUIKontrolor {
 		});
 	}
 
-	/*
-	 * @return Metoda vraca igraca koji trenutno igra.
+	/**
+	 * Metoda vraca igraca koji trenutno igra.
+	 * @return hangman.vratiIgraca();
 	 */
 	public static Igrac vratiTrenutnogIgraca() {
 		return hangman.vratiIgraca();
 	}
 
-	/*
+	/**
 	 * U slucaju da je korisnik hteo da pocne sa novom igrom, a da prethodno
 	 * nije odabrao igraca, ova metoda otvara prozor da ga upozori da treba da
 	 * izabere/kreira igraca.
@@ -201,18 +200,15 @@ public class GUIKontrolor {
 		JOptionPane.showMessageDialog(pocetniProzor.getContentPane(), "You haven't chosen a player!");
 	}
 
-	/*
-	 * @param ime Metodi se prosledjuje ime igraca.
-	 * 
-	 * @return Metoda poziva metodu za inicijaliziranje igrice za datog igraca.
+	/**
+	 * Metoda poziva metodu za inicijaliziranje igrice za datog igraca.
+	 * @param ime  Ime igraca.
+	 * @return hangman.incijalizujIgraca(ime)
 	 */
 	public static boolean incijalizujIgraca(String ime) {
 		return hangman.incijalizujIgraca(ime);
 	}
 
-	/*
-	 * 
-	 */
 	public static void probajCeluRec() {
 		if (hangman.daLiJeIgracIzgubio()) {
 			igracJeIzgubio();
@@ -223,7 +219,7 @@ public class GUIKontrolor {
 		}
 	}
 
-	/*
+	/**
 	 * Ukoliko je igrac izgubio zatvara se prozor za igricu i otvara dijalog za
 	 * poraz.
 	 */
@@ -233,7 +229,7 @@ public class GUIKontrolor {
 		prikaziPoraz();
 	}
 
-	/*
+	/**
 	 * Ukoliko je igrac pobedio zatvara se prozor za igricu i otvara dijalog za
 	 * pobedu.
 	 */
@@ -243,7 +239,7 @@ public class GUIKontrolor {
 		prikaziPobedu();
 	}
 
-	/*
+	/**
 	 * Metoda zatvara glavni prozor ako igrac odustane od igrice.
 	 */
 	public static void odustani() {
@@ -251,14 +247,16 @@ public class GUIKontrolor {
 		glavniProzor.dispose();
 	}
 
-	/*
+	/**
 	 * Metoda dodaje slovo koje je igrac odabrao.
+	 * @param slovo Odabrano slovo.
+	 * @return hangman.dodajSlovo(slovo);
 	 */
 	public static char[] ubaciSlovo(char slovo) {
 		return hangman.dodajSlovo(slovo);
 	}
 
-	/*
+	/**
 	 * Ukoliko je igrac pogodio sve pojmove iz sve kategorije metoda izbacuje
 	 * dijaloga da ga obavesti o tome. U suprotnom, otvara se prozor sa igricom.
 	 * Ako pak igrac nije uneo svoje ime, metoda poziva metodu da ga upozori o
@@ -274,27 +272,31 @@ public class GUIKontrolor {
 			upozoriDaNijeIzabranIgrac();
 	}
 
-	/*
-	 * @return Metoda vraca rec za prikaz u obliku * i praznih mesta iz odabrane
+	/**
+	 * Metoda vraca rec za prikaz u obliku * i praznih mesta iz odabrane
 	 * kategorije.
+	 * @param kategorija Odabrana kategorija.
+	 * @return hangman.pokreniPartiju(kategorija)
 	 */
 	public static char[] pokreniPartiju(String kategorija) {
 		return hangman.pokreniPartiju(kategorija);
 	}
 
-	/*
+	/**
 	 * @return Metoda vraca broj promasaja igraca.
+	 * @return hangman.vratiBrojPromasaja()
 	 */
 	public static int vratiBrojPromasaja() {
 		return hangman.vratiBrojPromasaja();
 	}
 
-	/*
-	 * @return Metoda vraca boolean koji oznacava da li je igrac pogodio celu
+	/**
+	 * Metoda vraca boolean koji oznacava da li je igrac pogodio celu
 	 * rec odjednom.
-	 * 
 	 * Ukoliko igrac pogodi celu rec, glavni prozor se zatvara i poziva se
 	 * metoda za pobedu. U suprotnom se vraca false.
+	 * @param text Cela rec.
+	 * @return boolean
 	 */
 	public static boolean probajOdjednom(String text) {
 		if (hangman.vratiIgraca().getIgrica().probajOdjednom(text)) {

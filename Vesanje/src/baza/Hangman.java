@@ -10,20 +10,20 @@ import sistemskeoperacije.SOVratiBrojPromasaja;
 import sistemskeoperacije.SOVratiIgraca;
 import sistemskeoperacije.SOVratiKategorije;
 
-/*
+/**
  * U ovoj klasi se nalaze osnovne operacije neophodne za uspesno izvrsavanje aplikacije.
  */
 public class Hangman {
-	/*
+	/**
 	 * Atribut predstavlja igrace koji igraju igricu.
 	 */
 	private Igraci igraci;
-	/*
+	/**
 	 * Atribut predstavlja indeks igraca koji trenutno igra.
 	 */
 	private int indexTrenutnogIgraca;
 
-	/*
+	/**
 	 * Metoda inicijalizuje igru.
 	 */
 	public Hangman() {
@@ -31,9 +31,11 @@ public class Hangman {
 		indexTrenutnogIgraca = -1;
 	}
 
-	/*
-	 * @return Metoda vraca boolean vredost koja pokazuje da li je kreiran novi
+	/**
+	 * Metoda vraca boolean vredost koja pokazuje da li je kreiran novi
 	 * igrac ili je pak uzet indeks igraca koji je ranije igrao.
+	 * @param ime Ime igraca
+	 * @ return boolean 
 	 */
 	public boolean incijalizujIgraca(String ime) {
 		boolean b =  SOInicijalizujIgraca.izvrsi(ime, igraci);
@@ -41,57 +43,66 @@ public class Hangman {
 		return b;
 	}
 
-	/*
-	 * @return Metoda vraca igraca koji trenutno igra.
+	/**
+	 * Metoda vraca igraca koji trenutno igra.
+	 * @return SOVratiIgraca.izvrsi(igraci, indexTrenutnogIgraca)
 	 */
 	public Igrac vratiIgraca() {
 		return SOVratiIgraca.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 
-	/*
-	 * @return Metoda inicijalizuje igricu za odredjenog igraca.
+	/**
+	 * Metoda inicijalizuje igricu za odredjenog igraca.
+	 * @param kategorija Kategorija reci
+	 * @return SOPokreniPartiju.izvrsi(kategorija, igraci, indexTrenutnogIgraca)
 	 */
 	public char[] pokreniPartiju(String kategorija) {
 		return SOPokreniPartiju.izvrsi(kategorija, igraci, indexTrenutnogIgraca);
 	}
 
-	/*
-	 * @return Metoda koja vraca kategorije koje igrac moze da pogadja.
+	/**
+	 * Metoda koja vraca kategorije koje igrac moze da pogadja.
+	 * @return SOVratiKategorije.izvrsi(igraci, indexTrenutnogIgraca)
 	 */
 	public String[] vratiKategorije() {
 		return SOVratiKategorije.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 
-	/*
+	/**
 	 * Metoda cuva igrace iz liste.
 	 */
 	public void sacuvajIgrace() {
 		SOSacuvajIgrace.izvrsi(igraci);
 	}
 
-	/*
+	/**
 	 * Metoda proverava da li je igrac izgubio.
+	 * @return SODaLiJeIgracIzgubio.izvrsi(igraci, indexTrenutnogIgraca)
 	 */
 	public boolean daLiJeIgracIzgubio() {
 		return SODaLiJeIgracIzgubio.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 
-	/*
+	/**
 	 * Metoda proverava da li je igrac pogodio celu rec.
+	 * @return SODaLiJeIgracPogodioCeluRec.izvrsi(igraci, indexTrenutnogIgraca)
 	 */
 	public boolean daLiJeIgracPogodioCeluRec() {
 		return SODaLiJeIgracPogodioCeluRec.izvrsi(igraci, indexTrenutnogIgraca);
 	}
 
-	/*
-	 * @return Metoda proverava da li se slovo nalazi u reci koja se trazi.
+	/**
+	 * Metoda proverava da li se slovo nalazi u reci koja se trazi.
+	 * @param slovo Slovo u reci
+	 * @return SODodajSlovo.izvrsi(slovo, igraci, indexTrenutnogIgraca)
 	 */
 	public char[] dodajSlovo(char slovo) {
 		return SODodajSlovo.izvrsi(slovo, igraci, indexTrenutnogIgraca);
 	}
 
-	/*
-	 * @return Metoda vraca broj promasaja igraca.
+	/**
+	 * Metoda vraca broj promasaja igraca.
+	 * @return SOVratiBrojPromasaja.izvrsi(igraci, indexTrenutnogIgraca)
 	 * 
 	 */
 	public int vratiBrojPromasaja() {
