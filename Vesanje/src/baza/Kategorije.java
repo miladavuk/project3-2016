@@ -12,8 +12,8 @@ public class Kategorije {
 			"Harry Potter and the philosopher's stone", "The adventures of Huckleberry Finn", "The great Gatsby",
 			"The brothers Karamazov", "One hundred years of solitude", "The catcher in the Rye", "Pride and prejudice",
 			"To kill a mockingbird", "Wuthering heights", "Crime and punishment", "The old man and the sea",
-			"The picture of Dorian Grey", "Chronicles of Narnia", "Twenty thousand leagues under the sea",
-			"The three musketeers", "The count of Monte Cristo", "The adventures of Sherlock Holmes" };
+			"The picture of Dorian Grey", "Chronicles of Narnia", "Moby Dick",
+			"The three musketeers", "The count of Monte Cristo", "Sherlock Holmes" };
 	/**
 	 * Atribut predstavlja niz od 20 pojmova za kategoriju drzave.
 	 */
