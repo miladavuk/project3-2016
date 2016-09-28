@@ -25,7 +25,7 @@ public class Kategorije {
 	 * Atribut predstavlja niz od 20 pojmova za kategoriju filmovi.
 	 */
 	private static String[] filmovi = new String[] { "The Pink Panther", "Minions", "Despicable Me", "Scream", "Hunger Games",
-			"Interstellar", "Schindler's List", "Pirats Of The Carribian", "Madagascar", "Frozen", "Hobbit",
+			"Interstellar", "Schindler's List", "Pirates Of The Carribian", "Madagascar", "Frozen", "Hobbit",
 			"The Lord Of The Rings", "Adaptation", "Dead Poets Society", "Hook", "Spiderman", "The Avengers", "Avatar",
 			"Titanic", "Finding Neverland" };
 	/**
@@ -38,7 +38,7 @@ public class Kategorije {
 	 * Atribut predstavlja niz od 20 pojmova za kategoriju poznate licnosti.
 	 */
 	private static String[] poznateLicnosti = new String[] { "Rafael Nadal", "Rihanna", "Brad Pitt", "Leonardo DiCaprio",
-			"Tom Cruise", "Barak Obama", "Emma Watson", "Johnny Depp", "Morgan Freeman", "Michael Jordan",
+			"Tom Cruise", "Barack Obama", "Emma Watson", "Johnny Depp", "Morgan Freeman", "Michael Jordan",
 			"Kobe Bryant", "LeBron James", "Madonna", "Stephen King", "Michael Jackson", "Jennifer Lopez", "Bill Gates",
 			"Paulo Coelho", "Joanne Kathleen Rowling", "George RR Martin" };
 	/**
